@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String[] tags = {"ID"};
+        String[] tags = {"ID", "dttmShowStart", "dttmShowEnd", "Title", "OriginalTitle", "ProductionYear", "LengthInMinutes", "Rating", "Theatre", "TheatreAuditorium"};
         XMLReaderTask reader = new XMLReaderTask(this, url, "Show", tags);
         reader.setCallback(MainActivity::dataCallback);
         reader.execute();
@@ -22,6 +22,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static void dataCallback(ArrayList<String[]> result) {
         System.out.println("###### TEST #####");
-        System.out.println(result.get(0)[0]);
+        System.out.println(new Movie(result.get(0)));
     }
 }

@@ -40,7 +40,7 @@ public class XMLReaderTask extends AsyncTask<String[], Void, ArrayList<String[]>
         this.mainTag = mainTag;
         this.tags = tags;
     }
-    
+
     public void setCallback(Consumer<ArrayList<String[]>> callback) {
         this.callback = callback;
     }
