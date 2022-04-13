@@ -9,10 +9,14 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.concurrent.Callable;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 
 // TODO: Add comments to me
@@ -23,12 +27,22 @@ public class XMLReaderTask extends AsyncTask<String[], Void, ArrayList<String[]>
     private String mainTag;
     private XmlPullParserFactory parserFactory;
     private ProgressDialog progressDialog;
+    private Consumer<ArrayList<String[]>> callback;
 
+    // XMLReaderTask parameters
+    // activity:    reference MainActivity for showing ProgressDialog
+    // url:         URL address for wanted XML file
+    // mainTag:     the base which is used to spilt XML into multiple objects
+    // tags:        list of tags whose value to get from inside of mainTag
     public XMLReaderTask(MainActivity activity, String url, String mainTag, String[] tags) {
         this.activity = activity;
         this.url = url;
         this.mainTag = mainTag;
         this.tags = tags;
+    }
+    
+    public void setCallback(Consumer<ArrayList<String[]>> callback) {
+        this.callback = callback;
     }
 
     @Override
@@ -74,7 +88,7 @@ public class XMLReaderTask extends AsyncTask<String[], Void, ArrayList<String[]>
     @Override
     protected void onPostExecute(ArrayList<String[]> result) {
         progressDialog.dismiss();
-        activity.dataCallback(result);
+        this.callback.accept(result);
     }
 
     public ArrayList<String[]> parseXML(XmlPullParser parser) {

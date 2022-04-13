@@ -15,10 +15,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         String[] tags = {"ID"};
-        new XMLReaderTask(this, url, "Show", tags).execute();
+        XMLReaderTask reader = new XMLReaderTask(this, url, "Show", tags);
+        reader.setCallback(MainActivity::dataCallback);
+        reader.execute();
     }
 
-    public void dataCallback(ArrayList<String[]> result) {
+    public static void dataCallback(ArrayList<String[]> result) {
         System.out.println("###### TEST #####");
         System.out.println(result.get(0)[0]);
     }
