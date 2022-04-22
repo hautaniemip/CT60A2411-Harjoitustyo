@@ -1,10 +1,11 @@
 package com.tite.ct60a2411_harjoitustyo;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Movie {
+public class Movie implements Serializable {
     private int ID;
     private Date startTime;
     private Date endTime;
