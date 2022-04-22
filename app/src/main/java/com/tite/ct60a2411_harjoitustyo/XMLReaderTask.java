@@ -46,6 +46,7 @@ public class XMLReaderTask extends AsyncTask<String[], Void, ArrayList<String[]>
     }
 
     @Override
+    // Setups and opens progress dialog
     protected void onPreExecute() {
         super.onPreExecute();
         progressDialog = new ProgressDialog(activity);

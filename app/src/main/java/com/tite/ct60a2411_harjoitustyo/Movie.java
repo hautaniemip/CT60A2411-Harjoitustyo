@@ -50,6 +50,7 @@ public class Movie {
         }
     }
 
+    // Prints info about movie
     public void printMovieInfo() {
         System.out.println("Movie id:" + this.ID);
     }

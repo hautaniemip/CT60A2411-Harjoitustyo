@@ -35,14 +35,16 @@ public class Theatre {
         this.theatreId = theatreId;
     }
 
+    // Adds movie object to movies if it doesn't exist already
     public void addMovie(Movie movie) {
         if (!this.movies.contains(movie))
             this.movies.add(movie);
     }
 
+    // Prints all movies in theatre and their info
     public void printTheatreInfo() {
         System.out.println("Theatre id: " + this.theatreId);
-        System.out.println("Movies:");
+        System.out.println("Movies(" + movies.size() + "):");
         for (Movie movie : movies)
             movie.printMovieInfo();
     }

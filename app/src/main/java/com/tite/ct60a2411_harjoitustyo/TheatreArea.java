@@ -42,6 +42,7 @@ public class TheatreArea {
         this.areaId = areaId;
     }
 
+    // Add a new Theatre to theatres if theatre with that id doesn't already exist
     public void addTheatre(Theatre theatre) {
         if (theatres.isEmpty()) {
             theatres.add(theatre);
@@ -49,8 +50,7 @@ public class TheatreArea {
         }
 
         for (Theatre theatreIt : this.theatres) {
-            if (theatreIt.getTheatreId() != theatre.getTheatreId()) {
-                theatres.add(theatre);
+            if (theatreIt.getTheatreId() == theatre.getTheatreId()) {
                 return;
             }
         }
@@ -58,6 +58,7 @@ public class TheatreArea {
         theatres.add(theatre);
     }
 
+    // Returns Theatre object if Theatre by theatreId exist or null
     public Theatre getTheatreById(int theatreId) {
         if (theatres.isEmpty())
             return null;
@@ -69,6 +70,7 @@ public class TheatreArea {
         return null;
     }
 
+    // Adds Movie to existing Theatre in area if theatre doesn't exist creates a new Theatre
     public void addMovieToTheatre(int theatreId, Movie movie) {
         Theatre theatre = this.getTheatreById(theatreId);
         if (theatre == null) {
@@ -80,6 +82,7 @@ public class TheatreArea {
         theatre.addMovie(movie);
     }
 
+    // Prints all theatres in area and their info
     public void printAreaInfo() {
         System.out.println("Theatre area id: " + this.areaId);
         System.out.println("Theatres (" + theatres.size() + "):");
