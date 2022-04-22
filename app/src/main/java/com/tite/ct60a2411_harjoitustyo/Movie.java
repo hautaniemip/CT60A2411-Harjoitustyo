@@ -8,6 +8,7 @@ public class Movie {
     private int ID;
     private Date startTime;
     private Date endTime;
+    private int eventId;
     private String title;
     private String originalTitle;
     private int year;
@@ -17,15 +18,17 @@ public class Movie {
     private String theatreName;
     private String auditorium;
 
-    public Movie(int ID, Date startTime, Date endTime, String title, String originalTitle, int year, int length, String rating, String theatreName, String auditorium) {
+    public Movie(int ID, Date startTime, Date endTime, int eventId, String title, String originalTitle, int year, int length, String rating, int theatreId, String theatreName, String auditorium) {
         this.ID = ID;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.eventId = eventId;
         this.title = title;
         this.originalTitle = originalTitle;
         this.year = year;
         this.length = length;
         this.rating = rating;
+        this.theatreId = theatreId;
         this.theatreName = theatreName;
         this.auditorium = auditorium;
     }
@@ -37,14 +40,15 @@ public class Movie {
             this.ID = Integer.parseInt(data[0]);
             this.startTime = dateFormat.parse(data[1]);
             this.endTime = dateFormat.parse(data[2]);
-            this.title = data[3];
-            this.originalTitle = data[4];
-            this.year = Integer.parseInt(data[5]);
-            this.length = Integer.parseInt(data[6]);
-            this.rating = data[7];
-            this.theatreId = Integer.parseInt(data[8]);
-            this.theatreName = data[9];
-            this.auditorium = data[10];
+            this.eventId = Integer.parseInt(data[3]);
+            this.title = data[4];
+            this.originalTitle = data[5];
+            this.year = Integer.parseInt(data[6]);
+            this.length = Integer.parseInt(data[7]);
+            this.rating = data[8];
+            this.theatreId = Integer.parseInt(data[9]);
+            this.theatreName = data[10];
+            this.auditorium = data[11];
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -65,6 +69,10 @@ public class Movie {
 
     public Date getEndTime() {
         return endTime;
+    }
+
+    public int getEventId() {
+        return eventId;
     }
 
     public String getTitle() {
@@ -105,11 +113,13 @@ public class Movie {
                 "ID=" + ID +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
+                ", eventId=" + eventId +
                 ", tittle='" + title + '\'' +
                 ", originalTittle='" + originalTitle + '\'' +
                 ", year=" + year +
                 ", length=" + length +
                 ", rating='" + rating + '\'' +
+                ", theatreId=" + theatreId +
                 ", theatreName='" + theatreName + '\'' +
                 ", auditorium='" + auditorium + '\'' +
                 '}';
