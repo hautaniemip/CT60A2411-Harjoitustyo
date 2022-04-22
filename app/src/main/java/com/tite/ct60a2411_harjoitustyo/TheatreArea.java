@@ -25,26 +25,63 @@ public class TheatreArea {
         AreaId(int id) {
             this.id = id;
         }
+
+        public int getId() {
+            return id;
+        }
     }
 
     private int areaId;
-    private ArrayList<Theatre> theatres;
+    private ArrayList<Theatre> theatres = new ArrayList<>();
 
     public TheatreArea(int areaId) {
         this.areaId = areaId;
     }
 
     public void addTheatre(Theatre theatre) {
-        for (Theatre theatreIt : this.theatres) {
-            if (theatreIt.getTheatreId() != theatre.getTheatreId())
-                theatres.add(theatre);
+        if (theatres.isEmpty()) {
+            theatres.add(theatre);
+            return;
         }
+
+        for (Theatre theatreIt : this.theatres) {
+            System.out.println(theatreIt.getTheatreId() + " " + theatre.getTheatreId());
+            if (theatreIt.getTheatreId() != theatre.getTheatreId()) {
+                theatres.add(theatre);
+                return;
+            }
+        }
+
+        theatres.add(theatre);
+    }
+
+    public Theatre getTheatreById(int theatreId) {
+        if (theatres.isEmpty())
+            return null;
+
+        for (Theatre theatre : theatres)
+            if (theatre.getTheatreId() == theatreId)
+                return theatre;
+
+        return null;
     }
 
     public void addMovieToTheatre(int theatreId, Movie movie) {
+        Theatre theatre = this.getTheatreById(theatreId);
+        if (theatre == null) {
+            theatre = new Theatre(theatreId);
+            theatre.addMovie(movie);
+            this.addTheatre(theatre);
+            return;
+        }
+        theatre.addMovie(movie);
+    }
+
+    public void printAreaInfo() {
+        System.out.println("Theatre area id: " + this.areaId);
+        System.out.println("Theatres (" + theatres.size() + "):");
         for (Theatre theatre : theatres)
-            if (theatre.getTheatreId() == theatreId)
-                theatre.addMovie(movie);
+            theatre.printTheatreInfo();
     }
 
     public int getAreaId() {
