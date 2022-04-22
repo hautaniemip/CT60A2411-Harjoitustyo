@@ -18,14 +18,18 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private static TheatreArea.AreaId areaId = TheatreArea.AreaId.STRAND;
     private static ArrayList<TheatreArea> areas = new ArrayList<>();
-    private static String[] tags = {"ID", "dttmShowStart", "dttmShowEnd", "Title", "OriginalTitle", "ProductionYear", "LengthInMinutes", "Rating", "TheatreID", "Theatre", "TheatreAuditorium"};
+    private static String[] tags = {"ID", "dttmShowStart", "dttmShowEnd", "EventID", "Title", "OriginalTitle", "ProductionYear", "LengthInMinutes", "Rating", "TheatreID", "Theatre", "TheatreAuditorium"};
     private static String url;
     private static int areaIndex = 0;
-    private static MainActivity context;
+    public static MainActivity context;
+
+    private static MovieArchive movieArchive;
+
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
+
 
 
     @Override
@@ -33,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context = this;
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // This will display an Up icon (<-), we will replace it with hamburger later
@@ -42,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
         // Setup drawer view
         setupDrawerContent(nvDrawer);
+
+        movieArchive = MovieArchive.getInstance();
+        movieArchive.printArchiveInfo();
         readAllAreas();
     }
 
@@ -69,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         reader.execute();
 
         areaIndex++;
+        movieArchive.saveArchive();
     }
 
     // Callback function for XMLReader
@@ -77,10 +86,11 @@ public class MainActivity extends AppCompatActivity {
         for (String[] entry : result) {
             Movie movie = new Movie(entry);
             area.addMovieToTheatre(movie.getTheatreId(), movie);
+            movieArchive.addMovie(movie);
         }
 
         areas.add(area);
-        area.printAreaInfo();
+        //area.printAreaInfo();
 
         readAllAreas();
     }
