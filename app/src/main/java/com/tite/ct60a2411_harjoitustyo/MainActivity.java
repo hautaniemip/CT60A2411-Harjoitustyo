@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         areaIndex++;
     }
 
+    // Callback function for XMLReader
     public static void dataCallback(ArrayList<String[]> result) {
         TheatreArea area = new TheatreArea(areaId.getId());
         for (String[] entry : result) {
