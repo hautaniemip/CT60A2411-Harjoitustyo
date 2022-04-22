@@ -52,7 +52,7 @@ public class Movie {
 
     // Prints info about movie
     public void printMovieInfo() {
-        System.out.println("Movie id:" + this.ID);
+        System.out.println("Movie:" + this.toString());
     }
 
     public int getID() {
