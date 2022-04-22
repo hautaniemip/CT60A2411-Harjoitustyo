@@ -13,6 +13,7 @@ public class Movie {
     private int year;
     private int length;
     private String rating;
+    private int theatreId;
     private String theatreName;
     private String auditorium;
 
@@ -41,11 +42,16 @@ public class Movie {
             this.year = Integer.parseInt(data[5]);
             this.length = Integer.parseInt(data[6]);
             this.rating = data[7];
-            this.theatreName = data[8];
-            this.auditorium = data[9];
+            this.theatreId = Integer.parseInt(data[8]);
+            this.theatreName = data[9];
+            this.auditorium = data[10];
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    public void printMovieInfo() {
+        System.out.println("Movie id:" + this.ID);
     }
 
     public int getID() {
@@ -78,6 +84,10 @@ public class Movie {
 
     public String getRating() {
         return rating;
+    }
+
+    public int getTheatreId() {
+        return theatreId;
     }
 
     public String getTheatreName() {

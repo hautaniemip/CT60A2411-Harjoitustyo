@@ -3,6 +3,7 @@ package com.tite.ct60a2411_harjoitustyo;
 import java.util.ArrayList;
 
 public class Theatre {
+
     public enum TheatreId {
         OMENA (1056),
         SELLO (1050),
@@ -28,7 +29,7 @@ public class Theatre {
     }
 
     private int theatreId;
-    private ArrayList<Movie> movies;
+    private ArrayList<Movie> movies = new ArrayList<>();
 
     public Theatre(int theatreId) {
         this.theatreId = theatreId;
@@ -37,6 +38,13 @@ public class Theatre {
     public void addMovie(Movie movie) {
         if (!this.movies.contains(movie))
             this.movies.add(movie);
+    }
+
+    public void printTheatreInfo() {
+        System.out.println("Theatre id: " + this.theatreId);
+        System.out.println("Movies:");
+        for (Movie movie : movies)
+            movie.printMovieInfo();
     }
 
     public int getTheatreId() {
