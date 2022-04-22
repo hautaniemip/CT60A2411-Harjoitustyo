@@ -1,6 +1,8 @@
 package com.tite.ct60a2411_harjoitustyo;
 
-public class SettingsManager {
+import java.io.Serializable;
+
+public class SettingsManager implements Serializable {
     private static SettingsManager instance;
     private int languageIndex;
     private int fontSize;
