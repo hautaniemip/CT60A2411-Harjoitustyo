@@ -4,8 +4,11 @@ import java.util.ArrayList;
 
 public class TheatreArea {
     public enum AreaId {
+        PAAKAUPUNKISEUTU (1014),
+        ESPOO (1012),
         OMENA (1039),
         SELLO (1038),
+        HELSINKI (1002),
         ITIS (1045),
         KINOPALATSI_HELSINKI (1031),
         MAXIM (1032),
@@ -17,6 +20,7 @@ public class TheatreArea {
         STRAND (1041),
         PLAZA (1018),
         PROMENADI (1019),
+        TAMPERE (1021),
         CINE_ATLAS (1034),
         PLEVNA (1035),
         KINOPALATSI_TURKU (1022);
@@ -45,7 +49,6 @@ public class TheatreArea {
         }
 
         for (Theatre theatreIt : this.theatres) {
-            System.out.println(theatreIt.getTheatreId() + " " + theatre.getTheatreId());
             if (theatreIt.getTheatreId() != theatre.getTheatreId()) {
                 theatres.add(theatre);
                 return;
