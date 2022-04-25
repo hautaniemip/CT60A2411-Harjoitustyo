@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -19,10 +18,9 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private static TheatreArea.AreaId areaId = TheatreArea.AreaId.STRAND;
     private static ArrayList<TheatreArea> areas = new ArrayList<>();
-    private static String[] tags = {"ID", "dttmShowStart", "dttmShowEnd", "EventID", "Title", "OriginalTitle", "ProductionYear", "LengthInMinutes", "Rating", "TheatreID", "Theatre", "TheatreAuditorium"};
-    private static String url;
+    private static final String[] tags = {"ID", "dttmShowStart", "dttmShowEnd", "EventID", "Title", "OriginalTitle", "ProductionYear", "LengthInMinutes", "Rating", "TheatreID", "Theatre", "TheatreAuditorium"};
     private static int areaIndex = 0;
-    public static MainActivity context;
+    private static MainActivity context;
 
     private static MovieArchive movieArchive;
 
@@ -36,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        context = this;
+        MainActivity.context = this;
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -91,15 +89,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Read XML for every area sequentially
-    public static void readAllAreas() {
+    public void readAllAreas() {
         if (areaIndex == TheatreArea.AreaId.values().length)
             return;
 
         TheatreArea.AreaId areaId = TheatreArea.AreaId.values()[areaIndex];
 
-        url = "https://www.finnkino.fi/xml/Schedule/?area=" + areaId.getId();
-        XMLReaderTask reader = new XMLReaderTask(context, url, "Show", tags);
-        reader.setCallback(MainActivity::dataCallback);
+        String url = "https://www.finnkino.fi/xml/Schedule/?area=" + areaId.getId();
+        XMLReaderTask reader = new XMLReaderTask(this, url, "Show", tags);
+        reader.setCallback(this::dataCallback);
         reader.execute();
 
         areaIndex++;
@@ -107,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Callback function for XMLReader
-    public static void dataCallback(ArrayList<String[]> result) {
+    public void dataCallback(ArrayList<String[]> result) {
         if (result == null) {
             readAllAreas();
             return;
@@ -180,5 +178,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static String[] getTags() {
         return tags;
+    }
+
+    public static MainActivity getContext() {
+        return context;
     }
 }

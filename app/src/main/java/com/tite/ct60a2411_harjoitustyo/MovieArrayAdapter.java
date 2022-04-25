@@ -9,14 +9,11 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 
 public class MovieArrayAdapter extends BaseAdapter implements ListAdapter {
-    private ArrayList<Movie> list;
-    private Context context;
+    private final ArrayList<Movie> list;
+    private final Context context;
 
     public MovieArrayAdapter(Context context, ArrayList<Movie> list) {
         this.list = list;
@@ -45,14 +42,15 @@ public class MovieArrayAdapter extends BaseAdapter implements ListAdapter {
             view = inflater.inflate(R.layout.layout_movie, null);
         }
 
-        TextView movieText = (TextView) view.findViewById(R.id.movieText);
-        Button showButton = (Button) view.findViewById(R.id.showButton);
+        TextView movieText = view.findViewById(R.id.movieText);
+        Button showButton = view.findViewById(R.id.showButton);
 
         movieText.setText(list.get(i).toString());
 
         showButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // TODO: Open MovieFragment of specific movie
                 System.out.println(list.get(i).getID());
             }
         });
