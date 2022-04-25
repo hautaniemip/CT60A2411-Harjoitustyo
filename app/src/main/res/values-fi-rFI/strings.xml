@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CT60A2411-Harjoitustyo</string>
+    <string name="drawer_open">Avaa valikko</string>
+    <string name="drawer_close">Sulje valikko</string>
+    <string name="show_movie">Näytä</string>
+    <string name="today">Tänään</string>
+    <string name="search">Haku</string>
+</resources>

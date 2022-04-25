@@ -1,11 +1,8 @@
 <resources>
-    <string name="app_name">CT60A2411-Harjoitustyo</string>
+    <string name="app_name" translatable="false">CT60A2411-Harjoitustyo</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="show_movie">Show</string>
-    <string name="movie_title">Movie Title</string>
-    <string name="movie_description">Movie Description</string>
     <string name="today">Today</string>
-    <string name="search">Search</string>
     <string name="search">Search</string>
 </resources>
