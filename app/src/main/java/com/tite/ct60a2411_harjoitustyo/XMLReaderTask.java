@@ -82,8 +82,9 @@ public class XMLReaderTask extends AsyncTask<String[], Void, ArrayList<String[]>
             e.printStackTrace();
         } catch (XmlPullParserException e) {
             e.printStackTrace();
+        }  finally {
+            return null;
         }
-        return null;
     }
 
     @Override

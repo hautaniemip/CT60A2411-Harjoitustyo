@@ -109,6 +109,10 @@ public class MainActivity extends AppCompatActivity {
 
     // Callback function for XMLReader
     public static void dataCallback(ArrayList<String[]> result) {
+        if (result == null) {
+            readAllAreas();
+            return;
+        }
         TheatreArea area = new TheatreArea(areaId.getId());
         for (String[] entry : result) {
             Movie movie = new Movie(entry);
