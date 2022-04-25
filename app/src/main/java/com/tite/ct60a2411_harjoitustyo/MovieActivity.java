@@ -1,9 +1,9 @@
 package com.tite.ct60a2411_harjoitustyo;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 // FIXME: Add back button to activity
 public class MovieActivity extends AppCompatActivity {

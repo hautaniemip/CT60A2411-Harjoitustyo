@@ -24,7 +24,7 @@ public class ShowingFragment extends androidx.fragment.app.Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        this.movieList = (ListView) view.findViewById(R.id.currentMovieList);
+        this.movieList = view.findViewById(R.id.currentMovieList);
         // TODO: Move next 5 lines to button press and add are selector
         String url = "https://www.finnkino.fi/xml/Schedule/?area=" + TheatreArea.AreaId.STRAND.getId();
         System.out.println(url);

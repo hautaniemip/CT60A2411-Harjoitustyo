@@ -16,9 +16,9 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    private static TheatreArea.AreaId areaId = TheatreArea.AreaId.STRAND;
-    private static ArrayList<TheatreArea> areas = new ArrayList<>();
     private static final String[] tags = {"ID", "dttmShowStart", "dttmShowEnd", "EventID", "Title", "OriginalTitle", "ProductionYear", "LengthInMinutes", "Rating", "TheatreID", "Theatre", "TheatreAuditorium"};
+    private static final TheatreArea.AreaId areaId = TheatreArea.AreaId.STRAND;
+    private static final ArrayList<TheatreArea> areas = new ArrayList<>();
     private static int areaIndex = 0;
     private static MainActivity context;
 
@@ -29,6 +29,13 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
 
+    public static String[] getTags() {
+        return tags;
+    }
+
+    public static MainActivity getContext() {
+        return context;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +43,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         MainActivity.context = this;
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // This will display an Up icon (<-), we will replace it with hamburger later
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Find our drawer view
-        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        nvDrawer = (NavigationView) findViewById(R.id.nvView);
+        mDrawer = findViewById(R.id.drawer_layout);
+        nvDrawer = findViewById(R.id.nvView);
         // Setup drawer view
         setupDrawerContent(nvDrawer);
 
@@ -178,13 +185,5 @@ public class MainActivity extends AppCompatActivity {
         // NOTE: Make sure you pass in a valid toolbar reference.  ActionBarDrawToggle() does not require it
         // and will not render the hamburger icon without it.
         return new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open, R.string.drawer_close);
-    }
-
-    public static String[] getTags() {
-        return tags;
-    }
-
-    public static MainActivity getContext() {
-        return context;
     }
 }

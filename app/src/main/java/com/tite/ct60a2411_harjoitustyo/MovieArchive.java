@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class MovieArchive implements Serializable {
     private static MovieArchive instance;
-    private ArrayList<Movie> movies = new ArrayList<>();
+    private final ArrayList<Movie> movies = new ArrayList<>();
 
     public MovieArchive() {
 

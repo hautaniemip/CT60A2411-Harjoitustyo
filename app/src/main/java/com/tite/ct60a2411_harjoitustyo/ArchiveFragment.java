@@ -9,7 +9,7 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class ArchiveFragment extends androidx.fragment.app.Fragment{
+public class ArchiveFragment extends androidx.fragment.app.Fragment {
     private MovieArchive movieArchive;
     private ListView movieList;
 
@@ -22,7 +22,7 @@ public class ArchiveFragment extends androidx.fragment.app.Fragment{
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        movieList = (ListView) view.findViewById(R.id.archiveMovieListView);
+        movieList = view.findViewById(R.id.archiveMovieListView);
 
         MovieArrayAdapter adapter = new MovieArrayAdapter(view.getContext(), movieArchive.getMovies());
         movieList.setAdapter(adapter);

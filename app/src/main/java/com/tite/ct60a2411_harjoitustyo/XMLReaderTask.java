@@ -9,22 +9,19 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.concurrent.Callable;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 
 // TODO: Add comments to me
 public class XMLReaderTask extends AsyncTask<String[], Void, ArrayList<String[]>> {
-    private MainActivity activity;
-    private String url;
-    private String[] tags;
-    private String mainTag;
+    private final MainActivity activity;
+    private final String url;
+    private final String[] tags;
+    private final String mainTag;
     private XmlPullParserFactory parserFactory;
     private ProgressDialog progressDialog;
     private Consumer<ArrayList<String[]>> callback;
