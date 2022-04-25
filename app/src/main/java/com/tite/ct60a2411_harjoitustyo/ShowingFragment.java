@@ -44,7 +44,7 @@ public class ShowingFragment extends androidx.fragment.app.Fragment{
             movies.add(movie);
         }
 
-        ArrayAdapter<Movie> adapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_list_item_1, movies);
+        MovieArrayAdapter adapter = new MovieArrayAdapter(view.getContext(), movies);
         movieList.setAdapter(adapter);
     }
 }
