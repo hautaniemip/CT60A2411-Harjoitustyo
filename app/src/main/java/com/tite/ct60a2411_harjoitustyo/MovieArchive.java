@@ -42,5 +42,7 @@ public class MovieArchive implements Serializable {
         System.out.println("MovieArchive size: " + movies.size());
     }
 
-
+    public ArrayList<Movie> getMovies() {
+        return movies;
+    }
 }
