@@ -52,8 +52,6 @@ public class MovieArrayAdapter extends BaseAdapter implements ListAdapter {
         showButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: Open MovieFragment of specific movie
-                System.out.println(list.get(i).getID());
                 Intent intent = new Intent(MainActivity.getContext(), MovieActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("movie", list.get(i));

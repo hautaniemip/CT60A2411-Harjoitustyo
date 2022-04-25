@@ -23,7 +23,7 @@ public class ArchiveFragment extends androidx.fragment.app.Fragment{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         movieList = (ListView) view.findViewById(R.id.archiveMovieListView);
-        System.out.println("Archive size: " + movieArchive.getMovies().size());
+
         MovieArrayAdapter adapter = new MovieArrayAdapter(view.getContext(), movieArchive.getMovies());
         movieList.setAdapter(adapter);
         super.onViewCreated(view, savedInstanceState);

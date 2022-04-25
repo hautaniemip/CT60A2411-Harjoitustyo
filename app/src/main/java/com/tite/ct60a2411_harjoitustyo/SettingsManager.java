@@ -8,12 +8,6 @@ public class SettingsManager implements Serializable {
     private int fontSize;
     private int updateArchiveLength;
 
-    public SettingsManager(int languageIndex, int fontSize, int updateArchiveLength) {
-        this.languageIndex = languageIndex;
-        this.fontSize = fontSize;
-        this.updateArchiveLength = updateArchiveLength;
-    }
-
     public SettingsManager() {
         this.languageIndex = 0;
         this.fontSize = 16;
