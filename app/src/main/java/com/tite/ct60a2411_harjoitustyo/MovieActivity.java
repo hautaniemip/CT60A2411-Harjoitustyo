@@ -22,9 +22,11 @@ public class MovieActivity extends AppCompatActivity {
         }
 
         TextView tempData = findViewById(R.id.tempMovieData);
-        if (movie != null)
+        TextView movieTitle = findViewById(R.id.movieTitle_activity);
+        if (movie != null) {
+            movieTitle.setText(movie.getTitle());
             tempData.setText(movie.toString());
-        else
+        } else
             tempData.setText("Error no movie");
     }
 }
