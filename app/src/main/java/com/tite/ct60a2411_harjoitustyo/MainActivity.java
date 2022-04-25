@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         movieArchive = MovieArchive.getInstance();
         movieArchive.printArchiveInfo();
-        readAllAreas();
+        //readAllAreas();
     }
 
     @Override

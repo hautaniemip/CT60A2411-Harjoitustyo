@@ -1,6 +1,8 @@
 package com.tite.ct60a2411_harjoitustyo;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +54,11 @@ public class MovieArrayAdapter extends BaseAdapter implements ListAdapter {
             public void onClick(View view) {
                 // TODO: Open MovieFragment of specific movie
                 System.out.println(list.get(i).getID());
+                Intent intent = new Intent(MainActivity.getContext(), MovieActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("movie", list.get(i));
+                intent.putExtras(bundle);
+                context.startActivity(intent);
             }
         });
         return view;
