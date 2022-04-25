@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    tools:override="true"
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -7,4 +8,22 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="dark_grey">#FF282828</color>
+    <color name="grey">#FF353535</color>
+
+    <color name="yellow">#FFFFC700</color>
+    <color name="abc_primary_text_material_dark">#FFFFC700</color>
+
+    <color name="mtrl_navigation_item_icon_tint" tools:override="true">#FFFFC700</color>
+    <color name="mtrl_navigation_item_text_color" tools:override="true">#FFFFC700</color>
+    <color name="mtrl_btn_text_color_selector" tools:override="true">#FFFFC700</color>
+
+
+
+
+
+
+
+
+
 </resources>
