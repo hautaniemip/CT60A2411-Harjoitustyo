@@ -1,19 +1,27 @@
 package com.tite.ct60a2411_harjoitustyo;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ShowingFragment extends androidx.fragment.app.Fragment {
     private View view;
     private ListView movieList;
+
+    private Button dateButton;
+    private Date selectedTime;
 
     @Nullable
     @Override
@@ -25,12 +33,18 @@ public class ShowingFragment extends androidx.fragment.app.Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         this.movieList = view.findViewById(R.id.currentMovieList);
-        // TODO: Move next 5 lines to button press and add are selector
-        String url = "https://www.finnkino.fi/xml/Schedule/?area=" + TheatreArea.AreaId.STRAND.getId();
-        System.out.println(url);
-        XMLReaderTask reader = new XMLReaderTask(MainActivity.getContext(), url, "Show", MainActivity.getTags());
-        reader.setCallback(this::dataCallback);
-        reader.execute();
+        selectedTime = new Date();
+
+        dateButton = view.findViewById(R.id.dateButton);
+        dateButton.setText(selectedTime.getDate() + "." + (selectedTime.getMonth() + 1) + ".");
+        dateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDatePicker();
+            }
+        });
+
+        updateList();
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -48,5 +62,28 @@ public class ShowingFragment extends androidx.fragment.app.Fragment {
 
         MovieArrayAdapter adapter = new MovieArrayAdapter(view.getContext(), movies);
         movieList.setAdapter(adapter);
+    }
+
+    private void updateList() {
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+        String url = "https://www.finnkino.fi/xml/Schedule/?area=" + TheatreArea.AreaId.STRAND.getId() + "&dt=" + format.format(selectedTime);
+        System.out.println(url);
+        XMLReaderTask reader = new XMLReaderTask(MainActivity.getContext(), url, "Show", MainActivity.getTags());
+        reader.setCallback(this::dataCallback);
+        reader.execute();
+    }
+
+    public void showDatePicker() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(MainActivity.getContext(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                dateButton.setText(day + "." + (month + 1) + ".");
+                selectedTime.setDate(day);
+                selectedTime.setMonth(month);
+                selectedTime.setYear(year - 1900);
+                updateList();
+            }
+        }, selectedTime.getYear() + 1900, selectedTime.getMonth(), selectedTime.getDate());
+        datePickerDialog.show();
     }
 }

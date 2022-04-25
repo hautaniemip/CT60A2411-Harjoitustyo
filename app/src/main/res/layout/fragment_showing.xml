@@ -39,4 +39,13 @@
         app:layout_constraintStart_toEndOf="@+id/showSpinner2"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/dateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="showDatePicker"
+        android:text="Button"
+        app:layout_constraintStart_toEndOf="@+id/showSpinner3"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
