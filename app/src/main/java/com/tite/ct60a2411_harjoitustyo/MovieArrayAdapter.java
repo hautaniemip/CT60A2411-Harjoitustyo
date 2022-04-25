@@ -44,9 +44,11 @@ public class MovieArrayAdapter extends BaseAdapter implements ListAdapter {
             view = inflater.inflate(R.layout.layout_movie, null);
         }
 
+        TextView movieTitle = view.findViewById(R.id.movieTitle);
         TextView movieText = view.findViewById(R.id.movieText);
         Button showButton = view.findViewById(R.id.showButton);
 
+        movieTitle.setText(list.get(i).getTitle());
         movieText.setText(list.get(i).toString());
 
         showButton.setOnClickListener(new View.OnClickListener() {
