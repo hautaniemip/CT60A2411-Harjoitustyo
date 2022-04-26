@@ -1,11 +1,11 @@
 package com.tite.ct60a2411_harjoitustyo;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-// FIXME: Add back button to activity
 public class MovieActivity extends AppCompatActivity {
     private Movie movie;
 
@@ -28,5 +28,13 @@ public class MovieActivity extends AppCompatActivity {
             tempData.setText(movie.toString());
         } else
             tempData.setText("Error no movie");
+
+        setSupportActionBar(findViewById(R.id.include));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        finish();
+        return true;
     }
 }
