@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +20,7 @@ import java.util.Date;
 public class ShowingFragment extends androidx.fragment.app.Fragment {
     private View view;
     private ListView movieList;
+    private TextView errorText;
 
     private Button dateButton;
     private Date selectedTime;
@@ -50,9 +52,11 @@ public class ShowingFragment extends androidx.fragment.app.Fragment {
 
     // After XML data is read put it into ListView using custom adapter
     public void dataCallback(ArrayList<String[]> result) {
-        // TODO: Show error to user if no movies were found
-        if (result == null)
+        if (result == null) {
+            errorText = (TextView) view.findViewById(R.id.errorText);
+            errorText.setText("No movies found");
             return;
+        }
 
         ArrayList<Movie> movies = new ArrayList<>();
         for (String[] entry : result) {
