@@ -6,6 +6,7 @@ public class Theatre {
 
     private final int theatreId;
     private final ArrayList<Movie> movies = new ArrayList<>();
+
     public Theatre(int theatreId) {
         this.theatreId = theatreId;
     }

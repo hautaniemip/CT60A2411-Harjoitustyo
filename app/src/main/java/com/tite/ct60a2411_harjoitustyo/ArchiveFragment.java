@@ -42,7 +42,6 @@ public class ArchiveFragment extends androidx.fragment.app.Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 adapter.getFilter().filter(charSequence);
-                System.out.println(charSequence);
             }
 
             @Override

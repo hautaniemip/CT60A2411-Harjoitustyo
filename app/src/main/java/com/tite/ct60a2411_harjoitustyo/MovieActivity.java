@@ -17,7 +17,6 @@ public class MovieActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
 
         if (bundle != null) {
-            System.out.println("Bundle NULL");
             movie = (Movie) bundle.getSerializable("movie");
         }
 

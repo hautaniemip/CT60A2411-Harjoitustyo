@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class TheatreArea {
     private final int areaId;
     private final ArrayList<Theatre> theatres = new ArrayList<>();
+
     public TheatreArea(int areaId) {
         this.areaId = areaId;
     }

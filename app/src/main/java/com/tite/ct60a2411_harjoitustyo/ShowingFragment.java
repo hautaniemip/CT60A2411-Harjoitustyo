@@ -53,7 +53,7 @@ public class ShowingFragment extends androidx.fragment.app.Fragment {
     // After XML data is read put it into ListView using custom adapter
     public void dataCallback(ArrayList<String[]> result) {
         if (result == null) {
-            errorText = (TextView) view.findViewById(R.id.errorText);
+            errorText = view.findViewById(R.id.errorText);
             errorText.setText("No movies found");
             return;
         }
@@ -71,7 +71,7 @@ public class ShowingFragment extends androidx.fragment.app.Fragment {
     private void updateList() {
         SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
         String url = "https://www.finnkino.fi/xml/Schedule/?area=" + TheatreArea.AreaId.STRAND.getId() + "&dt=" + format.format(selectedTime);
-        System.out.println(url);
+
         XMLReaderTask reader = new XMLReaderTask(MainActivity.getContext(), url, "Show", MainActivity.getTags());
         reader.setCallback(this::dataCallback);
         reader.execute();

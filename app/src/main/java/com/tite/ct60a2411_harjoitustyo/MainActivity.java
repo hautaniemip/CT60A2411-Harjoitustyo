@@ -45,11 +45,14 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         // This will display an Up icon (<-), we will replace it with hamburger later
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         // Find our drawer view
         mDrawer = findViewById(R.id.drawer_layout);
         nvDrawer = findViewById(R.id.nvView);
+
         // Setup drawer view
         setupDrawerContent(nvDrawer);
 
@@ -87,12 +90,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // The action bar home/up action should open or close the drawer.
-        /*switch (item.getItemId()) {
-            case android.R.id.home:
-                mDrawer.openDrawer(GravityCompat.START);
-                return true;
-        }*/
         if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
@@ -100,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Read XML for every area sequentially
+    // TODO: Replace with function that gets all movies in all areas for length given in settings
     public void readAllAreas() {
         if (areaIndex == TheatreArea.AreaId.values().length)
             return;
@@ -129,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         areas.add(area);
-        //area.printAreaInfo();
 
         readAllAreas();
     }
