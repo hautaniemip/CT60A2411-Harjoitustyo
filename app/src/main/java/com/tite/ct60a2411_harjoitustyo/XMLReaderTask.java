@@ -15,8 +15,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
-
-// TODO: Add comments to me
 public class XMLReaderTask extends AsyncTask<String[], Void, ArrayList<String[]>> {
     private final MainActivity activity;
     private final String url;
@@ -108,6 +106,8 @@ public class XMLReaderTask extends AsyncTask<String[], Void, ArrayList<String[]>
                         text = parser.getText();
                         break;
                     case XmlPullParser.END_TAG:
+                        // If end tag is mainTag add parsed tag data to result
+                        // This expects that the document doesn't contain given tags outside mainTag
                         if (name.equals(mainTag)) {
                             result.add(items);
                             items = new String[tags.length];
