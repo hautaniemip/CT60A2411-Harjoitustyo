@@ -12,12 +12,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ShowingFragment extends androidx.fragment.app.Fragment {
+public class ShowingFragment extends Fragment {
     private View view;
     private ListView movieList;
     private TextView errorText;

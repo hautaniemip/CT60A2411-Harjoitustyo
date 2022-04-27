@@ -11,8 +11,9 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
-public class ArchiveFragment extends androidx.fragment.app.Fragment {
+public class ArchiveFragment extends Fragment {
     private MovieArchive movieArchive;
     private MovieArrayAdapter adapter;
     private EditText archiveSearch;
