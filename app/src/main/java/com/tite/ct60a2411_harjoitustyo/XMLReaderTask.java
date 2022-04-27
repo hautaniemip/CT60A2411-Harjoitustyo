@@ -20,6 +20,7 @@ public class XMLReaderTask extends AsyncTask<String[], Void, ArrayList<String[]>
     private final String url;
     private final String[] tags;
     private final String mainTag;
+    private boolean showDialog = true;
     private XmlPullParserFactory parserFactory;
     private ProgressDialog progressDialog;
     private Consumer<ArrayList<String[]>> callback;
@@ -44,10 +45,12 @@ public class XMLReaderTask extends AsyncTask<String[], Void, ArrayList<String[]>
     // Setups and opens progress dialog
     protected void onPreExecute() {
         super.onPreExecute();
-        progressDialog = new ProgressDialog(activity);
-        progressDialog.setTitle("Getting data from XML");
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
+        if (showDialog) {
+            progressDialog = new ProgressDialog(activity);
+            progressDialog.setTitle("Getting data from XML");
+            progressDialog.setMessage("Loading...");
+            progressDialog.show();
+        }
     }
 
     @Override
@@ -83,7 +86,8 @@ public class XMLReaderTask extends AsyncTask<String[], Void, ArrayList<String[]>
 
     @Override
     protected void onPostExecute(ArrayList<String[]> result) {
-        progressDialog.dismiss();
+        if (progressDialog != null)
+            progressDialog.dismiss();
         this.callback.accept(result);
     }
 
@@ -128,5 +132,9 @@ public class XMLReaderTask extends AsyncTask<String[], Void, ArrayList<String[]>
             e.printStackTrace();
             return null;
         }
+    }
+
+    public void setShowDialog(boolean showDialog) {
+        this.showDialog = showDialog;
     }
 }

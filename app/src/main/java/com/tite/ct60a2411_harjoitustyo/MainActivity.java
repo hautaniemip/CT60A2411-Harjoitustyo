@@ -13,7 +13,9 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     private static final String[] tags = {"ID", "dttmShowStart", "dttmShowEnd", "EventID", "Title", "OriginalTitle", "ProductionYear", "LengthInMinutes", "Rating", "TheatreID", "Theatre", "TheatreAuditorium"};
@@ -23,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
     private static MainActivity context;
 
     private static MovieArchive movieArchive;
+    private SettingsManager settings;
+
+    private Calendar date;
+    private int dateOffset = 0;
 
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
@@ -71,7 +77,11 @@ public class MainActivity extends AppCompatActivity {
 
         movieArchive = MovieArchive.getInstance();
         movieArchive.printArchiveInfo();
-        //readAllAreas();
+
+        settings = SettingsManager.getInstance();
+
+        date = Calendar.getInstance();
+        updateArchive();
     }
 
     @Override
@@ -96,18 +106,26 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    // Read XML for every area sequentially
-    // TODO: Replace with function that gets all movies in all areas for length given in settings
-    public void readAllAreas() {
-        if (areaIndex == TheatreArea.AreaId.values().length)
-            return;
+    // Update movie archive for time length given in settings
+    public void updateArchive() {
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+
+        if (areaIndex == TheatreArea.AreaId.values().length) {
+            date.add(Calendar.DATE, 1);
+            dateOffset++;
+            areaIndex = 0;
+            if (dateOffset >= settings.getUpdateArchiveLength())
+                return;
+        }
 
         TheatreArea.AreaId areaId = TheatreArea.AreaId.values()[areaIndex];
 
-        String url = "https://www.finnkino.fi/xml/Schedule/?area=" + areaId.getId();
+        String url = "https://www.finnkino.fi/xml/Schedule/?area=" + areaId.getId() + "&dt=" + format.format(date.getTime());
         XMLReaderTask reader = new XMLReaderTask(this, url, "Show", tags);
         reader.setCallback(this::dataCallback);
+        reader.setShowDialog(false);
         reader.execute();
+        System.out.println(url);
 
         areaIndex++;
         movieArchive.saveArchive();
@@ -116,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
     // Callback function for XMLReader
     public void dataCallback(ArrayList<String[]> result) {
         if (result == null) {
-            readAllAreas();
+            updateArchive();
             return;
         }
         TheatreArea area = new TheatreArea(areaId.getId());
@@ -128,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
 
         areas.add(area);
 
-        readAllAreas();
+        updateArchive();
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
