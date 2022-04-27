@@ -3,6 +3,7 @@ package com.tite.ct60a2411_harjoitustyo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -114,8 +115,10 @@ public class MainActivity extends AppCompatActivity {
             date.add(Calendar.DATE, 1);
             dateOffset++;
             areaIndex = 0;
-            if (dateOffset >= settings.getUpdateArchiveLength())
+            if (dateOffset >= settings.getUpdateArchiveLength()) {
+                Toast.makeText(getApplicationContext(),"Archive updated", Toast.LENGTH_SHORT).show();
                 return;
+            }
         }
 
         TheatreArea.AreaId areaId = TheatreArea.AreaId.values()[areaIndex];
