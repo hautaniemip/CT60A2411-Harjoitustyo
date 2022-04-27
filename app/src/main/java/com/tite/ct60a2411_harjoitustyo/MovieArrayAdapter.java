@@ -52,7 +52,13 @@ public class MovieArrayAdapter extends BaseAdapter implements Filterable {
         Button showButton = view.findViewById(R.id.showButton);
 
         movieTitle.setText(filteredList.get(i).getTitle());
-        movieText.setText(filteredList.get(i).toString());
+        String movieDataString = "Year: " + filteredList.get(i).getYear() + ", Rating: " +
+                filteredList.get(i).getRating() + ", Original title: \"" + filteredList.get(i).getOriginalTitle()
+                + "\", length: " + filteredList.get(i).getLength() + "min, Showing from " +
+                filteredList.get(i).getStartTime() + " to " + filteredList.get(i).getEndTime() +
+                " at " + filteredList.get(i).getTheatreName() + ", " + filteredList.get(i).getAuditorium()
+                + ".";
+        movieText.setText(movieDataString);
 
         showButton.setOnClickListener(new View.OnClickListener() {
             @Override
