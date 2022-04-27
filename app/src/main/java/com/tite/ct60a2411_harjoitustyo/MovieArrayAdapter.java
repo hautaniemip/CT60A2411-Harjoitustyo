@@ -51,12 +51,13 @@ public class MovieArrayAdapter extends BaseAdapter implements Filterable {
         TextView movieText = view.findViewById(R.id.movieText);
         Button showButton = view.findViewById(R.id.showButton);
 
-        movieTitle.setText(filteredList.get(i).getTitle());
-        String movieDataString = "Year: " + filteredList.get(i).getYear() + ", Rating: " +
-                filteredList.get(i).getRating() + ", Original title: \"" + filteredList.get(i).getOriginalTitle()
-                + "\", length: " + filteredList.get(i).getLength() + "min, Showing from " +
-                filteredList.get(i).getStartTime() + " to " + filteredList.get(i).getEndTime() +
-                " at " + filteredList.get(i).getTheatreName() + ", " + filteredList.get(i).getAuditorium()
+        Movie movie = filteredList.get(i);
+        movieTitle.setText(movie.getTitle());
+        String movieDataString = "Year: " + movie.getYear() + ", Rating: " +
+                movie.getRating() + ", Original title: \"" + movie.getOriginalTitle()
+                + "\", length: " + movie.getLength() + "min, Showing from " +
+                movie.getStartTime() + " to " + movie.getEndTime() +
+                " at " + movie.getTheatreName() + ", " + movie.getAuditorium()
                 + ".";
         movieText.setText(movieDataString);
 
@@ -65,7 +66,7 @@ public class MovieArrayAdapter extends BaseAdapter implements Filterable {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.getContext(), MovieActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("movie", filteredList.get(i));
+                bundle.putSerializable("movie", movie);
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }
