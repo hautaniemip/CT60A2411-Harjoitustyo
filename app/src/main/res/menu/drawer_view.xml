@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
         <item
@@ -14,5 +15,9 @@
             android:id="@+id/nav_showing_fragment"
             android:icon="@drawable/ic_baseline_collections_bookmark_24"
             android:title="Showing now" />
+        <item
+            android:id="@+id/nav_settings_fragment"
+            android:icon="@android:drawable/ic_menu_manage"
+            android:title="Settings" />
     </group>
 </menu>

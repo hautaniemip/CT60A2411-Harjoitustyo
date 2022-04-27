@@ -156,6 +156,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.nav_showing_fragment:
                 fragmentClass = ShowingFragment.class;
                 break;
+            case R.id.nav_settings_fragment:
+                fragmentClass = SettingsFragment.class;
+                break;
             default:
                 fragmentClass = HomeFragment.class;
         }
