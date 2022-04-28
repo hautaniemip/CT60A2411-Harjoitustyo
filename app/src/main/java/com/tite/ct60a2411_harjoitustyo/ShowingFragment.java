@@ -35,7 +35,9 @@ public class ShowingFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        this.movieList = view.findViewById(R.id.currentMovieList);
+        movieList = view.findViewById(R.id.currentMovieList);
+        errorText = view.findViewById(R.id.errorText);
+
         selectedTime = new Date();
 
         dateButton = view.findViewById(R.id.dateButton);
@@ -54,10 +56,11 @@ public class ShowingFragment extends Fragment {
     // After XML data is read put it into ListView using custom adapter
     public void dataCallback(ArrayList<String[]> result) {
         if (result == null) {
-            errorText = view.findViewById(R.id.errorText);
             errorText.setText("No movies found");
             return;
         }
+
+        errorText.setText("");
 
         ArrayList<Movie> movies = new ArrayList<>();
         for (String[] entry : result) {
@@ -67,6 +70,10 @@ public class ShowingFragment extends Fragment {
 
         MovieArrayAdapter adapter = new MovieArrayAdapter(view.getContext(), movies);
         movieList.setAdapter(adapter);
+
+        if (result.size() == 0) {
+            errorText.setText("No movies found");
+        }
     }
 
     private void updateList() {
