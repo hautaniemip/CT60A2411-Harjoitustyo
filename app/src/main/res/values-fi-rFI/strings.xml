@@ -6,4 +6,10 @@
     <string name="show_movie">Näytä</string>
     <string name="today">Tänään</string>
     <string name="search">Haku</string>
+    <string name="home">Koti</string>
+    <string name="movie_archive">Arkisto</string>
+    <string name="settings">Asetukset</string>
+    <string name="archive_updating">Päivitetään arkisto</string>
+    <string name="archive_updated">Arkisto päivitetty</string>
+    <string name="movie_not_found">Elokuvia ei löytynyt</string>
 </resources>

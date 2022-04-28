@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         MainActivity.context = this;
 
+
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -85,9 +86,8 @@ public class MainActivity extends AppCompatActivity {
         settings = SettingsManager.getInstance();
 
         date = Calendar.getInstance();
-        Toast.makeText(getApplicationContext(),"Updating archive...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),getString(R.string.archive_updating) + "...", Toast.LENGTH_SHORT).show();
         updateArchive();
-
         setLanguage("fi");
     }
 
@@ -122,10 +122,10 @@ public class MainActivity extends AppCompatActivity {
             dateOffset++;
             areaIndex = 0;
             if (dateOffset >= settings.getUpdateArchiveLength()) {
-                Toast.makeText(getApplicationContext(),"Archive updated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.archive_updated), Toast.LENGTH_SHORT).show();
                 return;
             }
-            Toast.makeText(getApplicationContext(),"Updating archive " + dateOffset + "/" + settings.getUpdateArchiveLength(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),getString(R.string.archive_updating) + " " + dateOffset + "/" + settings.getUpdateArchiveLength(), Toast.LENGTH_SHORT).show();
         }
 
         TheatreArea.AreaId areaId = TheatreArea.AreaId.values()[areaIndex];
@@ -159,13 +159,16 @@ public class MainActivity extends AppCompatActivity {
         updateArchive();
     }
 
-    public static void setLanguage(String language) {
+    public void setLanguage(String language) {
         Locale locale = new Locale(language);
         Locale.setDefault(locale);
         Resources resources = context.getResources();
         Configuration config = resources.getConfiguration();
         config.setLocale(locale);
         resources.updateConfiguration(config, resources.getDisplayMetrics());
+
+        nvDrawer.getMenu().clear();
+        nvDrawer.inflateMenu(R.menu.drawer_view);
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -212,8 +215,12 @@ public class MainActivity extends AppCompatActivity {
 
         // Highlight the selected item has been done by NavigationView
         menuItem.setChecked(true);
+
         // Set action bar title
         setTitle(menuItem.getTitle());
+        if (menuItem.getItemId() == R.id.nav_home_fragment)
+            setTitle(R.string.app_name);
+
         // Close the navigation drawer
         mDrawer.closeDrawers();
     }

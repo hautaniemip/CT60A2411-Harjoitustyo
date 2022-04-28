@@ -5,4 +5,12 @@
     <string name="show_movie">Show</string>
     <string name="today">Today</string>
     <string name="search">Search</string>
+    <string name="home">Home</string>
+    <string name="movie_archive">Movie Archive</string>
+    <string name="showing_now">Showing now</string>
+    <string name="settings">Settings</string>
+    <string name="archive_updating">Updating archive</string>
+    <string name="archive_updated">Archive updated</string>
+    <string name="movie_not_found">No movies found</string>
+    <string name="date_button" translatable="false">%1d.%2d.</string>
 </resources>

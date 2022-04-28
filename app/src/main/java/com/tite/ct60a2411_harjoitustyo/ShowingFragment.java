@@ -41,7 +41,7 @@ public class ShowingFragment extends Fragment {
         selectedTime = new Date();
 
         dateButton = view.findViewById(R.id.dateButton);
-        dateButton.setText(selectedTime.getDate() + "." + (selectedTime.getMonth() + 1) + ".");
+        dateButton.setText(getString(R.string.date_button, selectedTime.getDate(), selectedTime.getMonth()));
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,7 +56,7 @@ public class ShowingFragment extends Fragment {
     // After XML data is read put it into ListView using custom adapter
     public void dataCallback(ArrayList<String[]> result) {
         if (result == null) {
-            errorText.setText("No movies found");
+            errorText.setText(R.string.movie_not_found);
             return;
         }
 
@@ -72,7 +72,7 @@ public class ShowingFragment extends Fragment {
         movieList.setAdapter(adapter);
 
         if (result.size() == 0) {
-            errorText.setText("No movies found");
+            errorText.setText(R.string.movie_not_found);
         }
     }
 
@@ -89,7 +89,7 @@ public class ShowingFragment extends Fragment {
         DatePickerDialog datePickerDialog = new DatePickerDialog(MainActivity.getContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                dateButton.setText(day + "." + (month + 1) + ".");
+                dateButton.setText(getString(R.string.date_button, day, month + 1));
                 selectedTime.setDate(day);
                 selectedTime.setMonth(month);
                 selectedTime.setYear(year - 1900);
