@@ -1,6 +1,8 @@
 package com.tite.ct60a2411_harjoitustyo;
 
+import android.app.Activity;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -17,6 +19,7 @@ import com.google.android.material.navigation.NavigationView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private static final String[] tags = {"ID", "dttmShowStart", "dttmShowEnd", "EventID", "Title", "OriginalTitle", "ProductionYear", "LengthInMinutes", "Rating", "TheatreID", "Theatre", "TheatreAuditorium"};
@@ -84,6 +87,8 @@ public class MainActivity extends AppCompatActivity {
         date = Calendar.getInstance();
         Toast.makeText(getApplicationContext(),"Updating archive...", Toast.LENGTH_SHORT).show();
         updateArchive();
+
+        setLanguage("fi");
     }
 
     @Override
@@ -152,6 +157,15 @@ public class MainActivity extends AppCompatActivity {
         areas.add(area);
 
         updateArchive();
+    }
+
+    public static void setLanguage(String language) {
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+        Resources resources = context.getResources();
+        Configuration config = resources.getConfiguration();
+        config.setLocale(locale);
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
