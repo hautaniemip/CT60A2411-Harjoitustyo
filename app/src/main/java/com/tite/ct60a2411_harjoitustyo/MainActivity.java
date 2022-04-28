@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         settings = SettingsManager.getInstance();
 
         date = Calendar.getInstance();
+        Toast.makeText(getApplicationContext(),"Updating archive...", Toast.LENGTH_SHORT).show();
         updateArchive();
     }
 
@@ -119,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Archive updated", Toast.LENGTH_SHORT).show();
                 return;
             }
+            Toast.makeText(getApplicationContext(),"Updating archive " + dateOffset + "/" + settings.getUpdateArchiveLength(), Toast.LENGTH_SHORT).show();
         }
 
         TheatreArea.AreaId areaId = TheatreArea.AreaId.values()[areaIndex];
