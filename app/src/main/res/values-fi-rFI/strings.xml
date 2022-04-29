@@ -29,4 +29,8 @@
         <item>Normaali</item>
         <item>Iso</item>
     </string-array>
+    <string name="language">Kieli</string>
+    <string name="font_size">Fontti koko</string>
+    <string name="home_area">Teatteri alue</string>
+    <string name="number_of_future_days_archive_updates">Arkiston päivitys pituus</string>
 </resources>
