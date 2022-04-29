@@ -59,7 +59,9 @@ public class ShowingFragment extends Fragment {
         areaSpinner = (Spinner) view.findViewById(R.id.areaSpinner);
 
         updateAreas();
-        updateList(TheatreArea.AreaId.STRAND.getId());
+
+        selectedId = TheatreArea.AreaId.STRAND.getId();
+        updateList(selectedId);
 
         areaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -119,7 +121,7 @@ public class ShowingFragment extends Fragment {
         // Apply the adapter to the spinner
         areaSpinner.setAdapter(adapter);
 
-
+        areaSpinner.setSelection(areaIds.indexOf(selectedId));
     }
 
     private void updateList(int id) {

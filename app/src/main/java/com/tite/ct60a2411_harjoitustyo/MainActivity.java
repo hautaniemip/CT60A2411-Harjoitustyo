@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         date = Calendar.getInstance();
         Toast.makeText(getApplicationContext(), getString(R.string.archive_updating) + "...", Toast.LENGTH_SHORT).show();
         updateArchive();
-        setLanguage("fi");
+        setLanguage("en");
     }
 
     @Override
