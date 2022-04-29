@@ -20,11 +20,12 @@
         android:id="@+id/archiveSearch"
         android:layout_width="0dp"
         android:layout_height="67dp"
+        android:backgroundTint="@color/yellow"
         android:ems="10"
         android:hint="@string/search"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
