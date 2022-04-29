@@ -18,8 +18,9 @@ public class Movie implements Serializable {
     private int theatreId;
     private String theatreName;
     private String auditorium;
+    private String largeImageUrl;
 
-    public Movie(int ID, Date startTime, Date endTime, int eventId, String title, String originalTitle, int year, int length, String rating, int theatreId, String theatreName, String auditorium) {
+    public Movie(int ID, Date startTime, Date endTime, int eventId, String title, String originalTitle, int year, int length, String rating, int theatreId, String theatreName, String auditorium, String largeImageUrl) {
         this.ID = ID;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -32,6 +33,7 @@ public class Movie implements Serializable {
         this.theatreId = theatreId;
         this.theatreName = theatreName;
         this.auditorium = auditorium;
+        this.largeImageUrl = largeImageUrl;
     }
 
     public Movie(String[] data) {
@@ -50,6 +52,7 @@ public class Movie implements Serializable {
             this.theatreId = Integer.parseInt(data[9]);
             this.theatreName = data[10];
             this.auditorium = data[11];
+            this.largeImageUrl = data[12];
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -108,6 +111,10 @@ public class Movie implements Serializable {
         return auditorium;
     }
 
+    public String getLargeImageUrl() {
+        return largeImageUrl;
+    }
+
     public void setID(int ID) {
         this.ID = ID;
     }
@@ -156,6 +163,10 @@ public class Movie implements Serializable {
         this.auditorium = auditorium;
     }
 
+    public void setLargeImageUrl(String largeImageUrl) {
+        this.largeImageUrl = largeImageUrl;
+    }
+
     @Override
     public String toString() {
         return "Movie{" +
@@ -171,6 +182,7 @@ public class Movie implements Serializable {
                 ", theatreId=" + theatreId +
                 ", theatreName='" + theatreName + '\'' +
                 ", auditorium='" + auditorium + '\'' +
+                ", largeImageUrl='" + largeImageUrl + '\'' +
                 '}';
     }
 }

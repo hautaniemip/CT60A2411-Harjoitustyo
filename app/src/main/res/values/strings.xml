@@ -30,4 +30,26 @@
         <item>Normal</item>
         <item>Large</item>
     </string-array>
+    <string-array name="area_array">
+        <item>Pääkaupunkiseutu</item>
+        <item>Espoo</item>
+        <item>Omena</item>
+        <item>Sello</item>
+        <item>Helsinki</item>
+        <item>Itis</item>
+        <item>Kinopalatsi Helsinki</item>
+        <item>Maxim</item>
+        <item>Tennispalatsi</item>
+        <item>Flamingo</item>
+        <item>Fantasia</item>
+        <item>Scala</item>
+        <item>Kuvapalatsi</item>
+        <item>Strand</item>
+        <item>Plaza</item>
+        <item>Promenadi</item>
+        <item>Tampere</item>
+        <item>Cine Atlas</item>
+        <item>Plevna</item>
+        <item>Kinopalatsi Turku</item>
+    </string-array>
 </resources>
