@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ShowingFragment extends Fragment {
+    private SettingsManager settingsManager;
+
     private View view;
     private ListView movieList;
     private TextView errorText;
@@ -37,6 +39,7 @@ public class ShowingFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_showing, container, false);
+        settingsManager = SettingsManager.getInstance();
         return view;
     }
 
@@ -60,7 +63,7 @@ public class ShowingFragment extends Fragment {
 
         updateAreas();
 
-        selectedId = TheatreArea.AreaId.STRAND.getId();
+        selectedId = settingsManager.getHomeArea().getId();
         updateList(selectedId);
 
         areaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
