@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.SimpleDateFormat;
+
 public class MovieActivity extends AppCompatActivity {
     private Movie movie;
     private ListView list;
@@ -29,22 +31,24 @@ public class MovieActivity extends AppCompatActivity {
 
         if (movie != null) {
             movieTitle.setText(movie.getTitle());
-            errorText.setText(movie.toString());
 
             int key = 0;
             final String[] matrix = {"_id", "key", "value"};
             final String[] columns = {"key", "value"};
             final int[] layouts = {R.id.key, R.id.value};
+            SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy HH:mm");
 
             MatrixCursor cursor = new MatrixCursor(matrix);
 
             cursor.addRow(new Object[]{key++, getString(R.string.original_title), movie.getOriginalTitle()});
             cursor.addRow(new Object[]{key++, getString(R.string.rating), movie.getRating()});
-            cursor.addRow(new Object[]{key++, getString(R.string.length), movie.getLength()});
+            cursor.addRow(new Object[]{key++, getString(R.string.length), movie.getLength() + " min"});
+
             if (movie.getStartTime() != null) {
-                cursor.addRow(new Object[]{key++, getString(R.string.start_time), movie.getStartTime()});
-                cursor.addRow(new Object[]{key++, getString(R.string.end_time), movie.getEndTime()});
+                cursor.addRow(new Object[]{key++, getString(R.string.start_time), format.format(movie.getStartTime())});
+                cursor.addRow(new Object[]{key++, getString(R.string.end_time), format.format(movie.getEndTime())});
             }
+
             cursor.addRow(new Object[]{key++, getString(R.string.year), movie.getYear()});
             if (movie.getTheatreName() != null) {
                 cursor.addRow(new Object[]{key++, getString(R.string.theatre), movie.getTheatreName() + ", " + movie.getAuditorium()});
