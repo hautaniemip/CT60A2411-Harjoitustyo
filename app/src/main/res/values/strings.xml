@@ -27,7 +27,7 @@
     </string-array>
     <string-array name="fontSize_array">
         <item>Small</item>
-        <item>Medium</item>
+        <item>Normal</item>
         <item>Large</item>
     </string-array>
 </resources>
