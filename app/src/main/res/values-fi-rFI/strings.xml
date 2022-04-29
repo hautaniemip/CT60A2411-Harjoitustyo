@@ -12,4 +12,5 @@
     <string name="archive_updating">Päivitetään arkisto</string>
     <string name="archive_updated">Arkisto päivitetty</string>
     <string name="movie_not_found">Elokuvia ei löytynyt</string>
+    <string name="showing_now">Näytetään nyt</string>
 </resources>
