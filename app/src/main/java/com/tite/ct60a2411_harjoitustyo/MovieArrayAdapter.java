@@ -52,16 +52,21 @@ public class MovieArrayAdapter extends BaseAdapter implements Filterable {
         TextView movieText = view.findViewById(R.id.movieText);
         Button showButton = view.findViewById(R.id.showButton);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM. hh:mm");
-        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM. HH:mm");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
 
 
         Movie movie = filteredList.get(i);
         movieTitle.setText(movie.getTitle());
-        String movieDataString = context.getString(R.string.rating) + ": " + movie.getRating() + "\n" + context.getString(R.string.showing) + ": " +
-                dateFormat.format(movie.getStartTime()) + "-" +
-                timeFormat.format(movie.getEndTime()) +
-                "\n" + context.getString(R.string.theatre) + ": " + movie.getTheatreName() + ", " + movie.getAuditorium();
+        String movieDataString = "";
+        if (movie.getStartTime() != null) {
+            movieDataString = context.getString(R.string.rating) + ": " + movie.getRating() + "\n" + context.getString(R.string.showing) + ": " +
+                    dateFormat.format(movie.getStartTime()) + "-" +
+                    timeFormat.format(movie.getEndTime()) +
+                    "\n" + context.getString(R.string.theatre) + ": " + movie.getTheatreName() + ", " + movie.getAuditorium();
+        } else {
+            movieDataString = context.getString(R.string.rating) + ": " + movie.getRating();
+        }
         movieText.setText(movieDataString);
 
         showButton.setOnClickListener(new View.OnClickListener() {
