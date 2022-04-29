@@ -11,7 +11,7 @@ public class SettingsManager implements Serializable {
 
     private SettingsManager() {
         this.languageIndex = 0;
-        this.fontSize = 16;
+        this.fontSize = 1;
         this.updateArchiveLength = 14;
         this.homeArea = TheatreArea.AreaId.STRAND;
     }
