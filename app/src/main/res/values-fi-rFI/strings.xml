@@ -15,9 +15,9 @@
     <string name="original_title">Alkuperäinen nimi</string>
     <string name="rating">Ikäraja</string>
     <string name="length">Kesto</string>
-    <string name="start_time">Alku aika</string>
-    <string name="end_time">Loppumis aika</string>
-    <string name="year">Julkaisu vuosi</string>
+    <string name="start_time">Alkamisaika</string>
+    <string name="end_time">Loppumisaika</string>
+    <string name="year">Julkaisuvuosi</string>
     <string name="theatre">Teatteri</string>
     <string name="showing">Näytetään</string>
     <string-array name="language_array">
