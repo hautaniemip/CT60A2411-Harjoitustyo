@@ -96,7 +96,8 @@ public class MovieArrayAdapter extends BaseAdapter implements Filterable {
 
                 for (Movie movie : filteringList) {
                     String movieTitle = movie.getTitle();
-                    if (movieTitle.toLowerCase().contains(filterString))
+                    String originalTitle = movie.getOriginalTitle();
+                    if (movieTitle.toLowerCase().contains(filterString) || originalTitle.toLowerCase().contains(filterString))
                         filteredList1.add(movie);
                 }
 
