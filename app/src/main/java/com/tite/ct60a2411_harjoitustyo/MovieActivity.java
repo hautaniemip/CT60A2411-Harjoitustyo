@@ -60,7 +60,7 @@ public class MovieActivity extends AppCompatActivity {
             list.setAdapter(data);
 
         } else {
-            errorText.setText("Error no movie");
+            errorText.setText(R.string.movie_error);
         }
 
         setSupportActionBar(findViewById(R.id.include));

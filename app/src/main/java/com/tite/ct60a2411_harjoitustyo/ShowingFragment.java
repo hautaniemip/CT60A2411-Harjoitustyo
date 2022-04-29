@@ -22,17 +22,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ShowingFragment extends Fragment {
+    private final ArrayList<Integer> areaIds = new ArrayList<>();
     private SettingsManager settingsManager;
-
     private View view;
     private ListView movieList;
     private TextView errorText;
-
     private Button dateButton;
     private Date selectedTime;
-
     private Spinner areaSpinner;
-    private final ArrayList<Integer> areaIds = new ArrayList<>();
     private int selectedId;
 
     @Nullable
@@ -119,7 +116,7 @@ public class ShowingFragment extends Fragment {
         }
 
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, areas);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, areas);
 
         // Apply the adapter to the spinner
         areaSpinner.setAdapter(adapter);

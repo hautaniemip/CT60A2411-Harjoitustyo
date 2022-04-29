@@ -21,7 +21,6 @@ public class XMLReaderTask extends AsyncTask<String[], Void, ArrayList<String[]>
     private final String[] tags;
     private final String mainTag;
     private boolean showDialog = true;
-    private XmlPullParserFactory parserFactory;
     private ProgressDialog progressDialog;
     private Consumer<ArrayList<String[]>> callback;
 
@@ -65,7 +64,7 @@ public class XMLReaderTask extends AsyncTask<String[], Void, ArrayList<String[]>
             connection.connect();
             InputStream stream = connection.getInputStream();
 
-            parserFactory = XmlPullParserFactory.newInstance();
+            XmlPullParserFactory parserFactory = XmlPullParserFactory.newInstance();
             XmlPullParser parser = parserFactory.newPullParser();
 
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);

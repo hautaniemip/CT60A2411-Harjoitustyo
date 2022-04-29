@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,8 +17,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 public class SettingsFragment extends Fragment {
-    private View view;
-
     private SettingsManager settingsManager;
     private Spinner languageSpinner;
     private Spinner fontSpinner;
@@ -30,17 +27,16 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         settingsManager = SettingsManager.getInstance();
-        view =inflater.inflate(R.layout.fragment_settings, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_settings, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        languageSpinner = (Spinner) view.findViewById(R.id.languageSpinner);
-        fontSpinner = (Spinner) view.findViewById(R.id.fontSizeSpinner);
-        areaSpinner = (Spinner) view.findViewById(R.id.homeAreaSpinner);
-        archiveDays = (EditText) view.findViewById(R.id.editTextDays);
+        languageSpinner = view.findViewById(R.id.languageSpinner);
+        fontSpinner = view.findViewById(R.id.fontSizeSpinner);
+        areaSpinner = view.findViewById(R.id.homeAreaSpinner);
+        archiveDays = view.findViewById(R.id.editTextDays);
 
         ArrayAdapter<CharSequence> languageAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.language_array, android.R.layout.simple_spinner_item);
         languageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

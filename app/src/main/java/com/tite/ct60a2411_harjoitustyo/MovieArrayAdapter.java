@@ -3,7 +3,6 @@ package com.tite.ct60a2411_harjoitustyo;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +58,7 @@ public class MovieArrayAdapter extends BaseAdapter implements Filterable {
 
         Movie movie = filteredList.get(i);
         movieTitle.setText(movie.getTitle());
-        String movieDataString = "";
+        String movieDataString;
         if (movie.getStartTime() != null) {
             movieDataString = context.getString(R.string.rating) + ": " + movie.getRating() + "\n" + context.getString(R.string.showing) + ": " +
                     dateFormat.format(movie.getStartTime()) + "-" +

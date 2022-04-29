@@ -14,16 +14,9 @@
     <color name="yellow">#FFFFC700</color>
     <color name="abc_primary_text_material_dark">#FFFFC700</color>
 
-    <color name="mtrl_navigation_item_icon_tint" tools:override="true">#FFFFC700</color>
-    <color name="mtrl_navigation_item_text_color" tools:override="true">#FFFFC700</color>
-    <color name="mtrl_btn_text_color_selector" tools:override="true">#FFFFC700</color>
-
-
-
-
-
-
-
+    <color name="material_navigation_item_icon_tint" tools:override="true">#FFFFC700</color>
+    <color name="material_navigation_item_text_color" tools:override="true">#FFFFC700</color>
+    <color name="material_btn_text_color_selector" tools:override="true">#FFFFC700</color>
 
 
 </resources>

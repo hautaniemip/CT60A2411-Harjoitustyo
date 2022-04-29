@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -25,6 +24,18 @@ public class HomeFragment extends Fragment {
 
     private SettingsManager settingsManager;
 
+    public static Drawable LoadImageFromWebOperations(String url) {
+        try {
+            InputStream is = (InputStream) new URL(url).getContent();
+            Drawable d = Drawable.createFromStream(is, null);
+            System.out.println("Loading the photo");
+            return d;
+        } catch (Exception e) {
+            System.out.println("Exception in loading the image" + e);
+            return null;
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -32,12 +43,13 @@ public class HomeFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_main, container, false);
 
     }
+
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         ImageView image = view.findViewById(R.id.firstImage);
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                try  {
+                try {
                     Drawable d = LoadImageFromWebOperations("https://media.finnkino.fi/1012/Event_13317/landscape_large/FantasticBeasts3_670.jpg");
                     image.setImageDrawable(d);
                     System.out.println("Image loaded");
@@ -48,8 +60,8 @@ public class HomeFragment extends Fragment {
         });
         thread.start();
 
-        movie1Button = (Button) view.findViewById(R.id.movie1Button);
-        movie2Button = (Button) view.findViewById(R.id.movie2Button);
+        movie1Button = view.findViewById(R.id.movie1Button);
+        movie2Button = view.findViewById(R.id.movie2Button);
 
         String url = "https://www.finnkino.fi/xml/Schedule/?area=" + settingsManager.getHomeArea();
 
@@ -58,18 +70,6 @@ public class HomeFragment extends Fragment {
         reader.setCallback(this::dataCallback);
         reader.execute();
 
-    }
-
-    public static Drawable LoadImageFromWebOperations(String url) {
-        try {
-            InputStream is = (InputStream) new URL(url).getContent();
-            Drawable d = Drawable.createFromStream(is, null);
-            System.out.println("Loading the photo");
-            return d;
-        } catch (Exception e) {
-            System.out.println("Execption in loafing the image" + e);
-            return null;
-        }
     }
 
     public void dataCallback(ArrayList<String[]> result) {

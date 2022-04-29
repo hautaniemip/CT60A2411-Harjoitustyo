@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="title" format="reference"/>
+    <attr name="title" format="reference" />
 </resources>

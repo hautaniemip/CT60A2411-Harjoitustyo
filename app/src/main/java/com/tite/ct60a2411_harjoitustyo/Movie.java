@@ -1,5 +1,7 @@
 package com.tite.ct60a2411_harjoitustyo;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -167,6 +169,7 @@ public class Movie implements Serializable {
         this.largeImageUrl = largeImageUrl;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Movie{" +

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -27,14 +28,12 @@ public class MainActivity extends AppCompatActivity {
     private static MainActivity context;
 
     private static MovieArchive movieArchive;
+    private static NavigationView nvDrawer;
     private SettingsManager settings;
-
     private Calendar date;
     private int dateOffset = 0;
-
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
-    private static NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
 
     public static String[] getTags() {
@@ -43,6 +42,34 @@ public class MainActivity extends AppCompatActivity {
 
     public static MainActivity getContext() {
         return context;
+    }
+
+    public static void setLanguage(String language) {
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+        Resources resources = context.getResources();
+        Configuration configuration = resources.getConfiguration();
+        configuration.setLocale(locale);
+        resources.updateConfiguration(configuration, resources.getDisplayMetrics());
+
+        nvDrawer.getMenu().clear();
+        nvDrawer.inflateMenu(R.menu.drawer_view);
+    }
+
+    public static void setFontSize(int size) {
+        switch (size) {
+            case 0:
+                context.setTheme(R.style.FontSmall);
+                break;
+            case 1:
+                context.setTheme(R.style.FontNormal);
+                break;
+            case 2:
+                context.setTheme(R.style.FontLarge);
+                break;
+            default:
+                context.setTheme(R.style.FontNormal);
+        }
     }
 
     @Override
@@ -99,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         // Pass any configuration change to the drawer toggles
         drawerToggle.onConfigurationChanged(newConfig);
@@ -164,43 +191,11 @@ public class MainActivity extends AppCompatActivity {
         updateArchive();
     }
 
-    public static void setLanguage(String language) {
-        Locale locale = new Locale(language);
-        Locale.setDefault(locale);
-        Resources resources = context.getResources();
-        Configuration config = resources.getConfiguration();
-        config.setLocale(locale);
-        resources.updateConfiguration(config, resources.getDisplayMetrics());
-
-        nvDrawer.getMenu().clear();
-        nvDrawer.inflateMenu(R.menu.drawer_view);
-    }
-
-    public static void setFontSize(int size) {
-        switch (size) {
-            case 0:
-                context.setTheme(R.style.FontSmall);
-                break;
-            case 1:
-                context.setTheme(R.style.FontNormal);
-                break;
-            case 2:
-                context.setTheme(R.style.FontLarge);
-                break;
-            default:
-                context.setTheme(R.style.FontNormal);
-        }
-
-//        Fragment fragment = context.getSupportFragmentManager().findFragmentById(R.id.fragmentContent);
-//        if (fragment != null)
-//            context.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, fragment).commit();
-    }
-
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                         selectDrawerItem(menuItem);
                         return true;
                     }

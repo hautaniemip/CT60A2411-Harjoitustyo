@@ -25,6 +25,7 @@
     <string name="font_size">Font Size</string>
     <string name="home_area">Home Area</string>
     <string name="number_of_future_days_archive_updates">Number of future days archive updates</string>
+    <string name="movie_error">Error no movie</string>
     <string-array name="language_array">
         <item>English</item>
         <item>Finnish</item>
