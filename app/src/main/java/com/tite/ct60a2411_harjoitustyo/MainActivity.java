@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         settings = SettingsManager.getInstance();
 
         date = Calendar.getInstance();
-        Toast.makeText(getApplicationContext(),getString(R.string.archive_updating) + "...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), getString(R.string.archive_updating) + "...", Toast.LENGTH_SHORT).show();
         updateArchive();
         setLanguage("fi");
     }
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), getString(R.string.archive_updated), Toast.LENGTH_SHORT).show();
                 return;
             }
-            Toast.makeText(getApplicationContext(),getString(R.string.archive_updating) + " " + dateOffset + "/" + settings.getUpdateArchiveLength(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.archive_updating) + " " + dateOffset + "/" + settings.getUpdateArchiveLength(), Toast.LENGTH_SHORT).show();
         }
 
         TheatreArea.AreaId areaId = TheatreArea.AreaId.values()[areaIndex];
