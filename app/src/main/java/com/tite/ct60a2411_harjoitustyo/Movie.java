@@ -67,100 +67,100 @@ public class Movie implements Serializable {
         return ID;
     }
 
-    public Date getStartTime() {
-        return startTime;
-    }
-
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public int getEventId() {
-        return eventId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getOriginalTitle() {
-        return originalTitle;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public int getLength() {
-        return length;
-    }
-
-    public String getRating() {
-        return rating;
-    }
-
-    public int getTheatreId() {
-        return theatreId;
-    }
-
-    public String getTheatreName() {
-        return theatreName;
-    }
-
-    public String getAuditorium() {
-        return auditorium;
-    }
-
-    public String getLargeImageUrl() {
-        return largeImageUrl;
-    }
-
     public void setID(int ID) {
         this.ID = ID;
+    }
+
+    public Date getStartTime() {
+        return startTime;
     }
 
     public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
+    public Date getEndTime() {
+        return endTime;
+    }
+
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    public int getEventId() {
+        return eventId;
     }
 
     public void setEventId(int eventId) {
         this.eventId = eventId;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getOriginalTitle() {
+        return originalTitle;
     }
 
     public void setOriginalTitle(String originalTitle) {
         this.originalTitle = originalTitle;
     }
 
+    public int getYear() {
+        return year;
+    }
+
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public int getLength() {
+        return length;
     }
 
     public void setLength(int length) {
         this.length = length;
     }
 
+    public String getRating() {
+        return rating;
+    }
+
     public void setRating(String rating) {
         this.rating = rating;
+    }
+
+    public int getTheatreId() {
+        return theatreId;
     }
 
     public void setTheatreId(int theatreId) {
         this.theatreId = theatreId;
     }
 
+    public String getTheatreName() {
+        return theatreName;
+    }
+
     public void setTheatreName(String theatreName) {
         this.theatreName = theatreName;
     }
 
+    public String getAuditorium() {
+        return auditorium;
+    }
+
     public void setAuditorium(String auditorium) {
         this.auditorium = auditorium;
+    }
+
+    public String getLargeImageUrl() {
+        return largeImageUrl;
     }
 
     public void setLargeImageUrl(String largeImageUrl) {

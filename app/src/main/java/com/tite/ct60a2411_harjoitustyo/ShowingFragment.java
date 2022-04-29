@@ -30,7 +30,7 @@ public class ShowingFragment extends Fragment {
     private Date selectedTime;
 
     private Spinner areaSpinner;
-    private ArrayList<Integer> areaIds = new ArrayList<>();
+    private final ArrayList<Integer> areaIds = new ArrayList<>();
     private int selectedId;
 
     @Nullable
@@ -56,7 +56,7 @@ public class ShowingFragment extends Fragment {
             }
         });
 
-        areaSpinner = (Spinner) view.findViewById(R.id.areaSpinner);
+        areaSpinner = view.findViewById(R.id.areaSpinner);
 
         updateAreas();
 
