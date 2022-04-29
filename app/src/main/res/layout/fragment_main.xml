@@ -85,13 +85,13 @@
             </HorizontalScrollView>
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/movie1Button"
                 android:layout_width="match_parent"
                 android:layout_height="121dp"
                 android:text="Movie in show 1" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/movie2Button"
                 android:layout_width="match_parent"
                 android:layout_height="121dp"
                 android:text="Movie in show 2" />
