@@ -20,4 +20,13 @@
     <string name="year">Julkaisu vuosi</string>
     <string name="theatre">Teatteri</string>
     <string name="showing">Näytetään</string>
+    <string-array name="language_array">
+        <item>Englanti</item>
+        <item>Suomi</item>
+    </string-array>
+    <string-array name="fontSize_array">
+        <item>Pieni</item>
+        <item>Normaali</item>
+        <item>Iso</item>
+    </string-array>
 </resources>
