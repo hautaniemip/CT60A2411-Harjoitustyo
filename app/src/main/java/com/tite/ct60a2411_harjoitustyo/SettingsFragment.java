@@ -10,12 +10,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 public class SettingsFragment extends Fragment {
+    private View view;
+
     private SettingsManager settingsManager;
     private Spinner languageSpinner;
     private Spinner fontSpinner;
@@ -26,16 +30,17 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         settingsManager = SettingsManager.getInstance();
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+        view =inflater.inflate(R.layout.fragment_settings, container, false);
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        languageSpinner = view.findViewById(R.id.languageSpinner);
-        fontSpinner = view.findViewById(R.id.fontSizeSpinner);
-        areaSpinner = view.findViewById(R.id.homeAreaSpinner);
-        archiveDays = view.findViewById(R.id.editTextDays);
+        languageSpinner = (Spinner) view.findViewById(R.id.languageSpinner);
+        fontSpinner = (Spinner) view.findViewById(R.id.fontSizeSpinner);
+        areaSpinner = (Spinner) view.findViewById(R.id.homeAreaSpinner);
+        archiveDays = (EditText) view.findViewById(R.id.editTextDays);
 
         ArrayAdapter<CharSequence> languageAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.language_array, android.R.layout.simple_spinner_item);
         languageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -66,9 +71,10 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
                 MainActivity.setFontSize(position);
+                if (position != settingsManager.getFontSize())
+                    reloadFragment();
                 settingsManager.setFontSize(position);
                 settingsManager.saveSettings();
-                // TODO: Refresh fragment after changes
             }
 
             @Override
@@ -89,6 +95,7 @@ public class SettingsFragment extends Fragment {
             }
         });
 
+        archiveDays.setText(String.valueOf(settingsManager.getUpdateArchiveLength()));
         archiveDays.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -109,5 +116,13 @@ public class SettingsFragment extends Fragment {
 
             }
         });
+    }
+
+    public void reloadFragment() {
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.setReorderingAllowed(false);
+        fragmentTransaction.detach(this).commit();
+        fragmentTransaction = getParentFragmentManager().beginTransaction();
+        fragmentTransaction.attach(this).commit();
     }
 }
