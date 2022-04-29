@@ -1,11 +1,14 @@
 package com.tite.ct60a2411_harjoitustyo;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -17,6 +20,7 @@ public class SettingsFragment extends Fragment {
     private Spinner languageSpinner;
     private Spinner fontSpinner;
     private Spinner areaSpinner;
+    private EditText archiveDays;
 
     @Nullable
     @Override
@@ -31,6 +35,7 @@ public class SettingsFragment extends Fragment {
         languageSpinner = view.findViewById(R.id.languageSpinner);
         fontSpinner = view.findViewById(R.id.fontSizeSpinner);
         areaSpinner = view.findViewById(R.id.homeAreaSpinner);
+        archiveDays = view.findViewById(R.id.editTextDays);
 
         ArrayAdapter<CharSequence> languageAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.language_array, android.R.layout.simple_spinner_item);
         languageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -81,6 +86,27 @@ public class SettingsFragment extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
+        archiveDays.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.length() != 0) {
+                    int length = Integer.parseInt(charSequence.toString());
+                    settingsManager.setUpdateArchiveLength(length);
+                    settingsManager.saveSettings();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
             }
         });
     }
