@@ -1,6 +1,5 @@
 package com.tite.ct60a2411_harjoitustyo;
 
-import android.app.Activity;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -24,7 +23,6 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
     private static final String[] tags = {"ID", "dttmShowStart", "dttmShowEnd", "EventID", "Title", "OriginalTitle", "ProductionYear", "LengthInMinutes", "Rating", "TheatreID", "Theatre", "TheatreAuditorium"};
     private static final TheatreArea.AreaId areaId = TheatreArea.AreaId.STRAND;
-    private static final ArrayList<TheatreArea> areas = new ArrayList<>();
     private static int areaIndex = 0;
     private static MainActivity context;
 
@@ -153,8 +151,6 @@ public class MainActivity extends AppCompatActivity {
             area.addMovieToTheatre(movie.getTheatreId(), movie);
             movieArchive.addMovie(movie);
         }
-
-        areas.add(area);
 
         updateArchive();
     }

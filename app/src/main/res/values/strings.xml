@@ -13,4 +13,11 @@
     <string name="archive_updated">Archive updated</string>
     <string name="movie_not_found">No movies found</string>
     <string name="date_button" translatable="false">%1d.%2d.</string>
+    <string name="original_title">Original Title</string>
+    <string name="rating">Rating</string>
+    <string name="length">Length</string>
+    <string name="start_time">Start Time</string>
+    <string name="end_time">End Time</string>
+    <string name="year">Year</string>
+    <string name="theatre">Theatre</string>
 </resources>
