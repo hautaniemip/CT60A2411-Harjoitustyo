@@ -39,6 +39,7 @@ public class SettingsFragment extends Fragment {
         ArrayAdapter<CharSequence> fontAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.fontSize_array, android.R.layout.simple_spinner_item);
         fontAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         fontSpinner.setAdapter(fontAdapter);
+        fontSpinner.setSelection(settingsManager.getFontSize());
 
         ArrayAdapter<CharSequence> areaAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.area_array, android.R.layout.simple_spinner_item);
         areaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -59,9 +60,10 @@ public class SettingsFragment extends Fragment {
         fontSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
-                int fontSize = (16 + (position * 8));
-                settingsManager.setFontSize(fontSize);
+                MainActivity.setFontSize(position);
+                settingsManager.setFontSize(position);
                 settingsManager.saveSettings();
+                // TODO: Refresh fragment after changes
             }
 
             @Override
@@ -82,6 +84,4 @@ public class SettingsFragment extends Fragment {
             }
         });
     }
-
-
 }

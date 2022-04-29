@@ -28,16 +28,14 @@
 
     <TextView
         android:id="@+id/movieTitle"
+        style="?title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"
         android:text="Here comes the movie title"
-        android:textSize="24sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="199dp"
-        tools:layout_editor_absoluteY="34dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
