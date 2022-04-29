@@ -43,12 +43,13 @@ public class SettingsFragment extends Fragment {
         ArrayAdapter<CharSequence> areaAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.area_array, android.R.layout.simple_spinner_item);
         areaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         areaSpinner.setAdapter(areaAdapter);
+        areaSpinner.setSelection(settingsManager.getHomeArea().ordinal());
 
         languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> arg0, View arg1,
-                                       int position, long id) {
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
                 settingsManager.setLanguageIndex(position);
+                settingsManager.saveSettings();
             }
 
             @Override
@@ -57,10 +58,10 @@ public class SettingsFragment extends Fragment {
         });
         fontSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> arg0, View arg1,
-                                       int position, long id) {
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
                 int fontSize = (16 + (position * 8));
                 settingsManager.setFontSize(fontSize);
+                settingsManager.saveSettings();
             }
 
             @Override
@@ -71,7 +72,9 @@ public class SettingsFragment extends Fragment {
         areaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
-                int areaID = TheatreArea.AreaId.values()[position].getId();
+                TheatreArea.AreaId areaID = TheatreArea.AreaId.values()[position];
+                settingsManager.setHomeArea(areaID);
+                settingsManager.saveSettings();
             }
 
             @Override
