@@ -20,4 +20,5 @@
     <string name="end_time">End Time</string>
     <string name="year">Year</string>
     <string name="theatre">Theatre</string>
+    <string name="showing">Showing</string>
 </resources>

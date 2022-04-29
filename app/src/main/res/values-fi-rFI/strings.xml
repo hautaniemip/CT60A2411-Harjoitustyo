@@ -19,4 +19,5 @@
     <string name="end_time">Loppumis aika</string>
     <string name="year">Julkaisu vuosi</string>
     <string name="theatre">Teatteri</string>
+    <string name="showing">Näytetään</string>
 </resources>
