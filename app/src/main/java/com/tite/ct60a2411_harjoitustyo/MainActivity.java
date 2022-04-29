@@ -1,6 +1,5 @@
 package com.tite.ct60a2411_harjoitustyo;
 
-import android.app.Activity;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -24,7 +23,6 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
     private static final String[] tags = {"ID", "dttmShowStart", "dttmShowEnd", "EventID", "Title", "OriginalTitle", "ProductionYear", "LengthInMinutes", "Rating", "TheatreID", "Theatre", "TheatreAuditorium"};
     private static final TheatreArea.AreaId areaId = TheatreArea.AreaId.STRAND;
-    private static final ArrayList<TheatreArea> areas = new ArrayList<>();
     private static int areaIndex = 0;
     private static MainActivity context;
 
@@ -86,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         settings = SettingsManager.getInstance();
 
         date = Calendar.getInstance();
-        Toast.makeText(getApplicationContext(),getString(R.string.archive_updating) + "...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), getString(R.string.archive_updating) + "...", Toast.LENGTH_SHORT).show();
         updateArchive();
         setLanguage("fi");
     }
@@ -125,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), getString(R.string.archive_updated), Toast.LENGTH_SHORT).show();
                 return;
             }
-            Toast.makeText(getApplicationContext(),getString(R.string.archive_updating) + " " + dateOffset + "/" + settings.getUpdateArchiveLength(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.archive_updating) + " " + dateOffset + "/" + settings.getUpdateArchiveLength(), Toast.LENGTH_SHORT).show();
         }
 
         TheatreArea.AreaId areaId = TheatreArea.AreaId.values()[areaIndex];
@@ -153,8 +151,6 @@ public class MainActivity extends AppCompatActivity {
             area.addMovieToTheatre(movie.getTheatreId(), movie);
             movieArchive.addMovie(movie);
         }
-
-        areas.add(area);
 
         updateArchive();
     }

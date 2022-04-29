@@ -12,6 +12,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class MovieArrayAdapter extends BaseAdapter implements Filterable {
@@ -51,12 +52,16 @@ public class MovieArrayAdapter extends BaseAdapter implements Filterable {
         TextView movieText = view.findViewById(R.id.movieText);
         Button showButton = view.findViewById(R.id.showButton);
 
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM. hh:mm");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm");
+
+
         Movie movie = filteredList.get(i);
         movieTitle.setText(movie.getTitle());
-        String movieDataString = "Rating: " + movie.getRating() + "\nShowing: " +
-                movie.getStartTime().toString().substring(0, 16) + "-" +
-                movie.getEndTime().toString().substring(11, 16) +
-                "\nTheatre: " + movie.getTheatreName() + ", " + movie.getAuditorium();
+        String movieDataString = context.getString(R.string.rating) + ": " + movie.getRating() + "\n" + context.getString(R.string.showing) + ": " +
+                dateFormat.format(movie.getStartTime()) + "-" +
+                timeFormat.format(movie.getEndTime()) +
+                "\n" + context.getString(R.string.theatre) + ": " + movie.getTheatreName() + ", " + movie.getAuditorium();
         movieText.setText(movieDataString);
 
         showButton.setOnClickListener(new View.OnClickListener() {

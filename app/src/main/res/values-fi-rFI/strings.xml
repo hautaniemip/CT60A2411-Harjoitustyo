@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CT60A2411-Harjoitustyo</string>
     <string name="drawer_open">Avaa valikko</string>
     <string name="drawer_close">Sulje valikko</string>
     <string name="show_movie">Näytä</string>
@@ -13,4 +12,12 @@
     <string name="archive_updated">Arkisto päivitetty</string>
     <string name="movie_not_found">Elokuvia ei löytynyt</string>
     <string name="showing_now">Näytetään nyt</string>
+    <string name="original_title">Alkuperäinen nimi</string>
+    <string name="rating">Ikäraja</string>
+    <string name="length">Kesto</string>
+    <string name="start_time">Alku aika</string>
+    <string name="end_time">Loppumis aika</string>
+    <string name="year">Julkaisu vuosi</string>
+    <string name="theatre">Teatteri</string>
+    <string name="showing">Näytetään</string>
 </resources>
