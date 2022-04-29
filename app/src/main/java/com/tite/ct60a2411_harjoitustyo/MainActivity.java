@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
-    private NavigationView nvDrawer;
+    private static NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
 
     public static String[] getTags() {
@@ -86,7 +86,16 @@ public class MainActivity extends AppCompatActivity {
         date = Calendar.getInstance();
         Toast.makeText(getApplicationContext(), getString(R.string.archive_updating) + "...", Toast.LENGTH_SHORT).show();
         updateArchive();
-        setLanguage("en");
+        switch (settings.getLanguageIndex()) {
+            case 0:
+                setLanguage("en");
+                break;
+            case 1:
+                setLanguage("fi");
+                break;
+            default:
+                setLanguage("en");
+        }
     }
 
     @Override
@@ -155,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
         updateArchive();
     }
 
-    public void setLanguage(String language) {
+    public static void setLanguage(String language) {
         Locale locale = new Locale(language);
         Locale.setDefault(locale);
         Resources resources = context.getResources();

@@ -45,6 +45,7 @@ public class SettingsFragment extends Fragment {
         ArrayAdapter<CharSequence> languageAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.language_array, android.R.layout.simple_spinner_item);
         languageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         languageSpinner.setAdapter(languageAdapter);
+        languageSpinner.setSelection(settingsManager.getLanguageIndex());
 
         ArrayAdapter<CharSequence> fontAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.fontSize_array, android.R.layout.simple_spinner_item);
         fontAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -59,6 +60,21 @@ public class SettingsFragment extends Fragment {
         languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
+                switch (position) {
+                    case 0:
+                        MainActivity.setLanguage("en");
+                        break;
+                    case 1:
+                        MainActivity.setLanguage("fi");
+                        break;
+                    default:
+                        MainActivity.setLanguage("en");
+                        break;
+                }
+
+                if (position != settingsManager.getLanguageIndex())
+                    reloadFragment();
+
                 settingsManager.setLanguageIndex(position);
                 settingsManager.saveSettings();
             }
