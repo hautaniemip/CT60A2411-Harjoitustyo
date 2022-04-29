@@ -25,8 +25,14 @@ public class MovieArchive implements Serializable {
         ObjectSaveUtils.saveObject(instance, "MovieArchive.data");
     }
 
-    // TODO: Get rid off unwanted attributes
     public void addMovie(Movie movie) {
+        // Removing unwanted attributes
+        movie.setStartTime(null);
+        movie.setEndTime(null);
+        movie.setTheatreId(0);
+        movie.setTheatreName(null);
+        movie.setAuditorium(null);
+
         if (movies.isEmpty()) {
             movies.add(movie);
             return;
