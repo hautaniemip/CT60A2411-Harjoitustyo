@@ -108,6 +108,54 @@ public class Movie implements Serializable {
         return auditorium;
     }
 
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setEventId(int eventId) {
+        this.eventId = eventId;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setOriginalTitle(String originalTitle) {
+        this.originalTitle = originalTitle;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
+    public void setTheatreId(int theatreId) {
+        this.theatreId = theatreId;
+    }
+
+    public void setTheatreName(String theatreName) {
+        this.theatreName = theatreName;
+    }
+
+    public void setAuditorium(String auditorium) {
+        this.auditorium = auditorium;
+    }
+
     @Override
     public String toString() {
         return "Movie{" +
