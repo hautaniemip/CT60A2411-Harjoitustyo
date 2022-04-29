@@ -21,7 +21,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String[] tags = {"ID", "dttmShowStart", "dttmShowEnd", "EventID", "Title", "OriginalTitle", "ProductionYear", "LengthInMinutes", "Rating", "TheatreID", "Theatre", "TheatreAuditorium"};
+    private static final String[] tags = {"ID", "dttmShowStart", "dttmShowEnd", "EventID", "Title", "OriginalTitle", "ProductionYear", "LengthInMinutes", "Rating", "TheatreID", "Theatre", "TheatreAuditorium", "EventLargeImagePortrait"};
     private static final TheatreArea.AreaId areaId = TheatreArea.AreaId.STRAND;
     private static int areaIndex = 0;
     private static MainActivity context;
