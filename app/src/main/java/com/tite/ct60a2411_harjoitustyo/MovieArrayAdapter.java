@@ -52,8 +52,8 @@ public class MovieArrayAdapter extends BaseAdapter implements Filterable {
         TextView movieText = view.findViewById(R.id.movieText);
         Button showButton = view.findViewById(R.id.showButton);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM. hh:mm");
-        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM. HH:mm");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
 
 
         Movie movie = filteredList.get(i);
