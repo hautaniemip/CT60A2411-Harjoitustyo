@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -27,6 +28,10 @@ public class ShowingFragment extends Fragment {
 
     private Button dateButton;
     private Date selectedTime;
+
+    private Spinner areaSpinner;
+    private ArrayList<Integer> areaIds = new ArrayList<>();
+    private int selectedId;
 
     @Nullable
     @Override
@@ -51,8 +56,24 @@ public class ShowingFragment extends Fragment {
             }
         });
 
-        updateList();
+        areaSpinner = (Spinner) view.findViewById(R.id.areaSpinner);
+
         updateAreas();
+        updateList(TheatreArea.AreaId.STRAND.getId());
+
+        areaSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedId = areaIds.get(i);
+                updateList(selectedId);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -80,8 +101,8 @@ public class ShowingFragment extends Fragment {
     }
 
     public void areaCallback(ArrayList<String[]> result) {
-        if (result == null){
-            errorText.setText("No areas found");
+        if (result == null) {
+            System.out.println("No areas found");
             return;
         }
 
@@ -89,22 +110,21 @@ public class ShowingFragment extends Fragment {
 
         for (String[] entry : result) {
             areas.add(entry[0]);
+            areaIds.add(Integer.parseInt(entry[1]));
         }
 
-        Spinner spinner = (Spinner) view.findViewById(R.id.areaSpinner);
-// Create an ArrayAdapter using the string array and a default spinner layout
+        // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, areas);
-// Specify the layout to use when the list of choices appears
-        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
+
+        // Apply the adapter to the spinner
+        areaSpinner.setAdapter(adapter);
 
 
     }
 
-    private void updateList() {
+    private void updateList(int id) {
         SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-        String url = "https://www.finnkino.fi/xml/Schedule/?area=" + TheatreArea.AreaId.STRAND.getId() + "&dt=" + format.format(selectedTime);
+        String url = "https://www.finnkino.fi/xml/Schedule/?area=" + id + "&dt=" + format.format(selectedTime);
 
         XMLReaderTask reader = new XMLReaderTask(MainActivity.getContext(), url, "Show", MainActivity.getTags());
         reader.setCallback(this::dataCallback);
@@ -114,7 +134,7 @@ public class ShowingFragment extends Fragment {
     private void updateAreas() {
         String url = "https://www.finnkino.fi/xml/TheatreAreas";
 
-        XMLReaderTask reader = new XMLReaderTask(MainActivity.getContext(), url, "TheatreArea", new String[]{"Name"});
+        XMLReaderTask reader = new XMLReaderTask(MainActivity.getContext(), url, "TheatreArea", new String[]{"Name", "ID"});
         reader.setCallback(this::areaCallback);
         reader.execute();
     }
@@ -128,7 +148,7 @@ public class ShowingFragment extends Fragment {
                 selectedTime.setDate(day);
                 selectedTime.setMonth(month);
                 selectedTime.setYear(year - 1900);
-                updateList();
+                updateList(selectedId);
             }
         }, selectedTime.getYear() + 1900, selectedTime.getMonth(), selectedTime.getDate());
         datePickerDialog.show();
