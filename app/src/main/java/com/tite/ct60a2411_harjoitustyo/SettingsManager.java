@@ -7,11 +7,13 @@ public class SettingsManager implements Serializable {
     private int languageIndex;
     private int fontSize;
     private int updateArchiveLength;
+    private TheatreArea.AreaId homeArea;
 
     private SettingsManager() {
         this.languageIndex = 0;
-        this.fontSize = 16;
+        this.fontSize = 1;
         this.updateArchiveLength = 14;
+        this.homeArea = TheatreArea.AreaId.STRAND;
     }
 
     public static SettingsManager getInstance() {
@@ -23,7 +25,7 @@ public class SettingsManager implements Serializable {
         return instance;
     }
 
-    public void saveArchive() {
+    public void saveSettings() {
         ObjectSaveUtils.saveObject(instance, "SettingsManager.data");
     }
 
@@ -49,5 +51,13 @@ public class SettingsManager implements Serializable {
 
     public void setUpdateArchiveLength(int updateArchiveLength) {
         this.updateArchiveLength = updateArchiveLength;
+    }
+
+    public TheatreArea.AreaId getHomeArea() {
+        return homeArea;
+    }
+
+    public void setHomeArea(TheatreArea.AreaId homeArea) {
+        this.homeArea = homeArea;
     }
 }

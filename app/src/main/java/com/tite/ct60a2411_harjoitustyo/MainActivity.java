@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         MainActivity.context = this;
 
-
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -82,11 +81,12 @@ public class MainActivity extends AppCompatActivity {
         movieArchive.printArchiveInfo();
 
         settings = SettingsManager.getInstance();
+        setFontSize(settings.getFontSize());
 
         date = Calendar.getInstance();
         Toast.makeText(getApplicationContext(), getString(R.string.archive_updating) + "...", Toast.LENGTH_SHORT).show();
         updateArchive();
-        setLanguage("fi");
+        setLanguage("en");
     }
 
     @Override
@@ -165,6 +165,26 @@ public class MainActivity extends AppCompatActivity {
 
         nvDrawer.getMenu().clear();
         nvDrawer.inflateMenu(R.menu.drawer_view);
+    }
+
+    public static void setFontSize(int size) {
+        switch (size) {
+            case 0:
+                context.setTheme(R.style.FontSmall);
+                break;
+            case 1:
+                context.setTheme(R.style.FontNormal);
+                break;
+            case 2:
+                context.setTheme(R.style.FontLarge);
+                break;
+            default:
+                context.setTheme(R.style.FontNormal);
+        }
+
+//        Fragment fragment = context.getSupportFragmentManager().findFragmentById(R.id.fragmentContent);
+//        if (fragment != null)
+//            context.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContent, fragment).commit();
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
