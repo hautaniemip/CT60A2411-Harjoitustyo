@@ -77,7 +77,12 @@ public class MovieActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     Drawable d = LoadImageFromUrl(movie.getLargeImageUrl().replaceAll("^http://", "https://"));
-                    imageView.setImageDrawable(d);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            imageView.setImageDrawable(d);
+                        }
+                    });
                     System.out.println("Image loaded");
                 }
             });
