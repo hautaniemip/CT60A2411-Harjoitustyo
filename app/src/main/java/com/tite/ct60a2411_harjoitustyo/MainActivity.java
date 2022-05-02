@@ -110,9 +110,6 @@ public class MainActivity extends AppCompatActivity {
         settings = SettingsManager.getInstance();
         setFontSize(settings.getFontSize());
 
-        date = Calendar.getInstance();
-        Toast.makeText(getApplicationContext(), getString(R.string.archive_updating) + "...", Toast.LENGTH_SHORT).show();
-        updateArchive();
         switch (settings.getLanguageIndex()) {
             case 0:
                 setLanguage("en");
@@ -123,6 +120,10 @@ public class MainActivity extends AppCompatActivity {
             default:
                 setLanguage("en");
         }
+
+        date = Calendar.getInstance();
+        Toast.makeText(getApplicationContext(), getString(R.string.archive_updating) + "...", Toast.LENGTH_SHORT).show();
+        updateArchive();
     }
 
     @Override
