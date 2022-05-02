@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/grey</item>
         <item name="colorPrimaryVariant">@color/dark_grey</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="android:activatedBackgroundIndicator">@color/half_yellow</item>
 
 
         <!-- Secondary brand color. -->
