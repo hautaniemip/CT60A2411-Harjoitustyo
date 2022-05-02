@@ -9,7 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +24,9 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
     private Button movie1Button;
     private Button movie2Button;
+    private ImageButton imageButton;
+    private LinearLayout linearLayoutHome;
+    private View view;
     private ArrayList<Movie> movies;
 
     private SettingsManager settingsManager;
@@ -30,18 +35,28 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         settingsManager = SettingsManager.getInstance();
-        return inflater.inflate(R.layout.fragment_main, container, false);
-
+        view = inflater.inflate(R.layout.fragment_main, container, false);
+        return view;
     }
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        ImageView image = view.findViewById(R.id.firstImage);
+        ImageView imageV = view.findViewById(R.id.firstImage);
+        ImageButton imageB = view.findViewById(R.id.imageButton5);
+        ImageButton imageB1 = view.findViewById(R.id.imageButton4);
+
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Drawable d = LoadImageFromUrl("https://media.finnkino.fi/1012/Event_13317/landscape_large/FantasticBeasts3_670.jpg");
-                    image.setImageDrawable(d);
+                    Drawable d;
+                    d = LoadImageFromUrl("https://media.finnkino.fi/1012/Event_13317/landscape_large/FantasticBeasts3_670.jpg");
+                    imageV.setImageDrawable(d);
+/*
+                    d = LoadImageFromUrl("https://media.finnkino.fi/1012/Event_13156/portrait_medium/Coda_1080.jpg");
+                    imageB.setImageDrawable(d);
+                    d = LoadImageFromUrl("https://media.finnkino.fi/1012/Event_13250/portrait_medium/Belfast_1080b.jpg");
+                    imageB1.setImageDrawable(d);
+*/
                     System.out.println("Image loaded");
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -52,6 +67,8 @@ public class HomeFragment extends Fragment {
 
         movie1Button = view.findViewById(R.id.movie1Button);
         movie2Button = view.findViewById(R.id.movie2Button);
+        imageButton = view.findViewById(R.id.imageButton);
+        linearLayoutHome = view.findViewById(R.id.linearLayoutHome);
 
         String url = "https://www.finnkino.fi/xml/Schedule/?area=" + settingsManager.getHomeArea();
 
@@ -94,5 +111,38 @@ public class HomeFragment extends Fragment {
                 MainActivity.getContext().startActivity(intent);
             }
         });
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    int n = 2;
+                    int i = 1;
+                    Drawable d;
+                    while(movies.get(n) != null) {
+                        String s = "imageButton" + i;
+
+                        int resID = getResources().getIdentifier(s, "id", "com.tite.ct60a2411_harjoitustyo");
+                        imageButton = (ImageButton) view.findViewById(resID);
+
+                        d = LoadImageFromUrl(movies.get(n).getLargeImageUrl().replaceAll("^http://", "https://"));
+                        System.out.println("####" + s + "###");
+                        System.out.println("####" + resID + "###");
+                        System.out.println("####" + movies.get(n).getLargeImageUrl() + "###");
+                        imageButton.setImageDrawable(d);
+                        i++;
+                        n++;
+                        // TODO error catch for unloaded pictures
+                    }
+
+                    System.out.println("Image loaded");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+
+
     }
 }

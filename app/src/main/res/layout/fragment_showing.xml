@@ -28,6 +28,7 @@
         android:id="@+id/areaSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:background="@drawable/spinner_background"
         android:minHeight="15dp"
         android:paddingEnd="20dp"
