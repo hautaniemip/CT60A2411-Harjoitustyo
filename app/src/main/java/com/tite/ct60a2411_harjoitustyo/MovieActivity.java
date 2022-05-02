@@ -1,5 +1,7 @@
 package com.tite.ct60a2411_harjoitustyo;
 
+import static com.tite.ct60a2411_harjoitustyo.ImageLoader.LoadImageFromUrl;
+
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.MatrixCursor;
@@ -64,9 +66,6 @@ public class MovieActivity extends AppCompatActivity {
                 cursor.addRow(new Object[]{key++, getString(R.string.theatre), movie.getTheatreName() + ", " + movie.getAuditorium()});
             }
 
-            if (movie.getLargeImageUrl() != null)
-                cursor.addRow(new Object[]{key++, "URL", movie.getLargeImageUrl()});
-
             SimpleCursorAdapter data = new SimpleCursorAdapter(this, R.layout.layout_two_list_item, cursor, columns, layouts);
 
             list = findViewById(R.id.dataContainer);
@@ -77,7 +76,7 @@ public class MovieActivity extends AppCompatActivity {
             Thread thread = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    Drawable d = LoadImageFromWebOperations(movie.getLargeImageUrl().replaceAll("^http://", "https://"));
+                    Drawable d = LoadImageFromUrl(movie.getLargeImageUrl().replaceAll("^http://", "https://"));
                     imageView.setImageDrawable(d);
                     System.out.println("Image loaded");
                 }
@@ -134,19 +133,5 @@ public class MovieActivity extends AppCompatActivity {
             default:
                 this.setTheme(R.style.FontNormal);
         }
-    }
-
-    public static Drawable LoadImageFromWebOperations(String url) {
-        try {
-            InputStream is = (InputStream) new URL(url).getContent();
-            Drawable d = Drawable.createFromStream(is, null);
-            System.out.println("Loading the photo");
-            return d;
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 }

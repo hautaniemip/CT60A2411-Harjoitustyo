@@ -1,5 +1,7 @@
 package com.tite.ct60a2411_harjoitustyo;
 
+import static com.tite.ct60a2411_harjoitustyo.ImageLoader.LoadImageFromUrl;
+
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -24,18 +26,6 @@ public class HomeFragment extends Fragment {
 
     private SettingsManager settingsManager;
 
-    public static Drawable LoadImageFromWebOperations(String url) {
-        try {
-            InputStream is = (InputStream) new URL(url).getContent();
-            Drawable d = Drawable.createFromStream(is, null);
-            System.out.println("Loading the photo");
-            return d;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -50,7 +40,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void run() {
                 try {
-                    Drawable d = LoadImageFromWebOperations("https://media.finnkino.fi/1012/Event_13317/landscape_large/FantasticBeasts3_670.jpg");
+                    Drawable d = LoadImageFromUrl("https://media.finnkino.fi/1012/Event_13317/landscape_large/FantasticBeasts3_670.jpg");
                     image.setImageDrawable(d);
                     System.out.println("Image loaded");
                 } catch (Exception e) {
