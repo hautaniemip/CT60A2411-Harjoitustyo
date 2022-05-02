@@ -49,7 +49,8 @@ public class Theatre {
         PROMENADI(1039),
         CINE_ATLAS(1040),
         PLEVNA(1037),
-        KINOPALATSI_TURKU(1035);
+        KINOPALATSI_TURKU(1035),
+        LUXE_MYLLY(1059);
 
         private final int id;
 

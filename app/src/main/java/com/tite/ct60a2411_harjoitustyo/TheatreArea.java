@@ -86,7 +86,9 @@ public class TheatreArea {
         TAMPERE(1021),
         CINE_ATLAS(1034),
         PLEVNA(1035),
-        KINOPALATSI_TURKU(1022);
+        TURKU_JA_RAISIO(1047),
+        KINOPALATSI_TURKU(1022),
+        LUXE_MYLLY(1046);
 
         private final int id;
 
