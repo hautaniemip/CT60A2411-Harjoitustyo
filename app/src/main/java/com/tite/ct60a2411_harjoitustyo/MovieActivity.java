@@ -7,6 +7,8 @@ import android.content.res.Resources;
 import android.database.MatrixCursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.RelativeSizeSpan;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -36,6 +38,7 @@ public class MovieActivity extends AppCompatActivity {
         setContentView(R.layout.activity_movie);
 
         archive = MovieArchive.getInstance();
+        settings = SettingsManager.getInstance();
 
         Bundle bundle = getIntent().getExtras();
 
@@ -48,7 +51,9 @@ public class MovieActivity extends AppCompatActivity {
         ratingBar = findViewById(R.id.ratingBar);
 
         if (movie != null) {
-            movieTitle.setText(movie.getTitle());
+            SpannableString title = new SpannableString(movie.getTitle());
+            title.setSpan(new RelativeSizeSpan(settings.getFontSize() + 1), 0, title.length(), 0);
+            movieTitle.setText(title);
 
             Movie archivedMovie = archive.getMovieByEventId(movie.getEventId());
 
@@ -116,7 +121,6 @@ public class MovieActivity extends AppCompatActivity {
         setSupportActionBar(findViewById(R.id.include));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        settings = SettingsManager.getInstance();
         setFontSize(settings.getFontSize());
 
         switch (settings.getLanguageIndex()) {

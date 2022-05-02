@@ -3,6 +3,8 @@ package com.tite.ct60a2411_harjoitustyo;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.RelativeSizeSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,8 @@ public class MovieArrayAdapter extends BaseAdapter implements Filterable {
     private final Context context;
     private final LayoutInflater inflater;
     private ArrayList<Movie> filteredList;
+
+    private SettingsManager settings;
 
     public MovieArrayAdapter(Context context, ArrayList<Movie> list) {
         this.list = list;
@@ -48,6 +52,8 @@ public class MovieArrayAdapter extends BaseAdapter implements Filterable {
         if (view == null)
             view = inflater.inflate(R.layout.layout_movie, null);
 
+        settings = SettingsManager.getInstance();
+
         TextView movieTitle = view.findViewById(R.id.movieTitle);
         TextView movieText = view.findViewById(R.id.movieText);
         Button showButton = view.findViewById(R.id.showButton);
@@ -57,7 +63,11 @@ public class MovieArrayAdapter extends BaseAdapter implements Filterable {
 
 
         Movie movie = filteredList.get(i);
-        movieTitle.setText(movie.getTitle());
+
+        SpannableString title = new SpannableString(movie.getTitle());
+        title.setSpan(new RelativeSizeSpan(settings.getFontSize() + 1), 0, title.length(), 0);
+        movieTitle.setText(title);
+
         String movieDataString;
         if (movie.getStartTime() != null) {
             movieDataString = context.getString(R.string.rating) + ": " + movie.getRating() + "\n" + context.getString(R.string.showing) + ": " +
