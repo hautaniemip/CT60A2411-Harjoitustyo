@@ -42,6 +42,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include" />
 
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movieTitle_activity" />
+
     <ListView
         android:id="@+id/dataContainer"
         android:layout_width="409dp"
@@ -49,6 +56,8 @@
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/movieTitle_activity" />
+        app:layout_constraintTop_toBottomOf="@+id/movieTitle_activity" >
+
+    </ListView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
