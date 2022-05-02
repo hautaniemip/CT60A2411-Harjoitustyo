@@ -7,7 +7,7 @@ public class MovieArchive implements Serializable {
     private static MovieArchive instance;
     private final ArrayList<Movie> movies = new ArrayList<>();
 
-    public MovieArchive() {
+    private MovieArchive() {
 
     }
 
@@ -43,6 +43,23 @@ public class MovieArchive implements Serializable {
                 return;
 
         movies.add(movie);
+    }
+
+    public Movie getMovieByEventId(int eventId) {
+        for (Movie movie : movies)
+            if (movie.getEventId() == eventId)
+                return movie;
+
+        return null;
+    }
+
+    public void updateUserRating(int eventId, float rating) {
+        for (Movie movie : movies) {
+            if (movie.getEventId() == eventId) {
+                movie.setUserRating(rating);
+                return;
+            }
+        }
     }
 
     public void printArchiveInfo() {
