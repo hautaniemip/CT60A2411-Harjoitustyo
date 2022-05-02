@@ -64,7 +64,7 @@ public class Movie implements Serializable {
 
     // Prints info about movie
     public void printMovieInfo() {
-        System.out.println("Movie:" + this);
+        System.out.println(this);
     }
 
     public int getID() {

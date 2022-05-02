@@ -13,11 +13,7 @@
                 </shape>
             </item>
 
-            <item
-                android:right="3dp"
-                android:gravity="center_vertical|end"
-                android:drawable="@drawable/ic_baseline_keyboard_arrow_down_24"
-                android:height="25dp"/>
+            <item android:height="25dp" android:drawable="@drawable/ic_baseline_keyboard_arrow_down_24" android:gravity="center_vertical|end" android:right="3dp" />
 
         </layer-list>
 

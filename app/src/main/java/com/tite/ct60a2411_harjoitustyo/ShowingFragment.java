@@ -57,7 +57,6 @@ public class ShowingFragment extends Fragment {
         });
 
         areaSpinner = view.findViewById(R.id.areaSpinner);
-
         updateAreas();
 
         selectedId = settingsManager.getHomeArea().getId();
@@ -79,7 +78,7 @@ public class ShowingFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    // After XML data is read put it into ListView using custom adapter
+    // After XML data is read, put it into ListView using custom adapter
     public void dataCallback(ArrayList<String[]> result) {
         if (result == null) {
             errorText.setText(R.string.movie_not_found);
@@ -102,6 +101,7 @@ public class ShowingFragment extends Fragment {
         }
     }
 
+    // After XML data is read, put it into area spinner
     public void areaCallback(ArrayList<String[]> result) {
         if (result == null) {
             System.out.println("No areas found");

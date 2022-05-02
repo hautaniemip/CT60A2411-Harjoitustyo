@@ -1,5 +1,8 @@
 package com.tite.ct60a2411_harjoitustyo;
 
+import static com.tite.ct60a2411_harjoitustyo.HelperFunctions.readObject;
+import static com.tite.ct60a2411_harjoitustyo.HelperFunctions.saveObject;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -13,7 +16,7 @@ public class MovieArchive implements Serializable {
 
     public static MovieArchive getInstance() {
         if (instance == null) {
-            instance = (MovieArchive) ObjectSaveUtils.readObject("MovieArchive.data");
+            instance = (MovieArchive) readObject("MovieArchive.data");
             if (instance == null)
                 instance = new MovieArchive();
         }
@@ -22,7 +25,7 @@ public class MovieArchive implements Serializable {
     }
 
     public void saveArchive() {
-        ObjectSaveUtils.saveObject(instance, "MovieArchive.data");
+        saveObject(instance, "MovieArchive.data");
     }
 
     public void addMovie(Movie movie) {

@@ -1,6 +1,6 @@
 package com.tite.ct60a2411_harjoitustyo;
 
-import static com.tite.ct60a2411_harjoitustyo.ImageLoader.LoadImageFromUrl;
+import static com.tite.ct60a2411_harjoitustyo.HelperFunctions.LoadImageFromUrl;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -11,14 +11,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -26,7 +23,6 @@ public class HomeFragment extends Fragment {
     private Button movie1Button;
     private Button movie2Button;
     private ImageButton imageButton;
-    private LinearLayout linearLayoutHome;
     private View view;
     private Button popularButton;
     private ArrayList<Movie> movies;
@@ -42,27 +38,19 @@ public class HomeFragment extends Fragment {
     }
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        ImageView imageV = view.findViewById(R.id.firstImage);
-        ImageButton imageB = view.findViewById(R.id.imageButton5);
-        ImageButton imageB1 = view.findViewById(R.id.imageButton4);
+        ImageView imageView = view.findViewById(R.id.firstImage);
 
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    Drawable d;
-                    d = LoadImageFromUrl("https://media.finnkino.fi/1012/Event_13317/landscape_large/FantasticBeasts3_670.jpg");
-                    imageV.setImageDrawable(d);
-/*
-                    d = LoadImageFromUrl("https://media.finnkino.fi/1012/Event_13156/portrait_medium/Coda_1080.jpg");
-                    imageB.setImageDrawable(d);
-                    d = LoadImageFromUrl("https://media.finnkino.fi/1012/Event_13250/portrait_medium/Belfast_1080b.jpg");
-                    imageB1.setImageDrawable(d);
-*/
-                    System.out.println("Image loaded");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                Drawable drawable;
+                drawable = LoadImageFromUrl("https://media.finnkino.fi/1012/Event_13317/landscape_large/FantasticBeasts3_670.jpg");
+                MainActivity.getContext().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        imageView.setImageDrawable(drawable);
+                    }
+                });
             }
         });
         thread.start();
@@ -71,7 +59,6 @@ public class HomeFragment extends Fragment {
         movie2Button = view.findViewById(R.id.movie2Button);
         popularButton = view.findViewById(R.id.popularButton);
         imageButton = view.findViewById(R.id.imageButton);
-        linearLayoutHome = view.findViewById(R.id.linearLayoutHome);
 
         String url = "https://www.finnkino.fi/xml/Schedule/?area=" + settingsManager.getHomeArea();
 
@@ -107,27 +94,42 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        int popularIndex = new Random().nextInt(movies.size());
+        popularButton.setText(movies.get(popularIndex).getTitle());
+        popularButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openActivity(movies.get(popularIndex));
+            }
+        });
+
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    int n = 2;
-                    int i = 1;
-                    Drawable d;
-                    while(movies.get(n) != null) {
-                        String s = "imageButton" + i;
+                    int movieIndex = 2;
+                    int index = 1;
+                    Drawable drawable;
+                    while (movies.get(movieIndex) != null && index <= 10) {
+                        String s = "imageButton" + index;
 
                         int resID = getResources().getIdentifier(s, "id", "com.tite.ct60a2411_harjoitustyo");
-                        imageButton = (ImageButton) view.findViewById(resID);
+                        imageButton = view.findViewById(resID);
+                        System.out.println(index + ":" + resID + " : " + imageButton);
 
-                        d = LoadImageFromUrl(movies.get(n).getLargeImageUrl().replaceAll("^http://", "https://"));
-                        System.out.println("####" + s + "###");
-                        System.out.println("####" + resID + "###");
-                        System.out.println("####" + movies.get(n).getLargeImageUrl() + "###");
-                        imageButton.setImageDrawable(d);
-                        i++;
-                        n++;
-                        // TODO error catch for unloaded pictures
+                        drawable = LoadImageFromUrl(movies.get(movieIndex).getLargeImageUrl().replaceAll("^http://", "https://"));
+
+                        final Drawable finalDrawable = drawable;
+                        MainActivity.getContext().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (finalDrawable != null)
+                                    imageButton.setImageDrawable(finalDrawable);
+                            }
+                        });
+                        index++;
+                        movieIndex++;
+                        // TODO: error catch for unloaded pictures
                     }
 
                     System.out.println("Image loaded");
@@ -137,15 +139,6 @@ public class HomeFragment extends Fragment {
             }
         });
         thread.start();
-
-        int popularIndex = new Random().nextInt(movies.size());
-        popularButton.setText(movies.get(popularIndex).getTitle());
-        popularButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openActivity(movies.get(popularIndex));
-            }
-        });
     }
 
     public void openActivity(Movie movie) {

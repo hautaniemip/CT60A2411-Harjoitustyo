@@ -70,10 +70,10 @@ public class MovieArrayAdapter extends BaseAdapter implements Filterable {
 
         String movieDataString;
         if (movie.getStartTime() != null) {
-            movieDataString = context.getString(R.string.rating) + ": " + movie.getRating() + "\n" + context.getString(R.string.showing) + ": " +
-                    dateFormat.format(movie.getStartTime()) + "-" +
-                    timeFormat.format(movie.getEndTime()) +
-                    "\n" + context.getString(R.string.theatre) + ": " + movie.getTheatreName() + ", " + movie.getAuditorium();
+            movieDataString =
+                    context.getString(R.string.rating) + ": " + movie.getRating() + "\n" +
+                            context.getString(R.string.showing) + ": " + dateFormat.format(movie.getStartTime()) + "-" + timeFormat.format(movie.getEndTime()) + "\n" +
+                            context.getString(R.string.theatre) + ": " + movie.getTheatreName() + ", " + movie.getAuditorium();
         } else {
             movieDataString = context.getString(R.string.rating) + ": " + movie.getRating();
         }
@@ -102,17 +102,19 @@ public class MovieArrayAdapter extends BaseAdapter implements Filterable {
 
                 final ArrayList<Movie> filteringList = list;
                 int count = filteringList.size();
-                final ArrayList<Movie> filteredList1 = new ArrayList<>(count);
+                final ArrayList<Movie> tempFilteredList = new ArrayList<>(count);
 
                 for (Movie movie : filteringList) {
                     String movieTitle = movie.getTitle();
                     String originalTitle = movie.getOriginalTitle();
+
+                    // Match search to title or original title
                     if (movieTitle.toLowerCase().contains(filterString) || originalTitle.toLowerCase().contains(filterString))
-                        filteredList1.add(movie);
+                        tempFilteredList.add(movie);
                 }
 
-                results.values = filteredList1;
-                results.count = filteredList1.size();
+                results.values = tempFilteredList;
+                results.count = tempFilteredList.size();
 
                 return results;
             }

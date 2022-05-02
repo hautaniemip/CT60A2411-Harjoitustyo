@@ -1,7 +1,9 @@
 package com.tite.ct60a2411_harjoitustyo;
 
+import static com.tite.ct60a2411_harjoitustyo.HelperFunctions.setFontSize;
+import static com.tite.ct60a2411_harjoitustyo.HelperFunctions.setLanguage;
+
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -19,7 +21,6 @@ import com.google.android.material.navigation.NavigationView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private static final String[] tags = {"ID", "dttmShowStart", "dttmShowEnd", "EventID", "Title", "OriginalTitle", "ProductionYear", "LengthInMinutes", "Rating", "TheatreID", "Theatre", "TheatreAuditorium", "EventLargeImagePortrait"};
@@ -28,11 +29,11 @@ public class MainActivity extends AppCompatActivity {
     private static MainActivity context;
 
     private static MovieArchive movieArchive;
-    private static NavigationView nvDrawer;
+    private static NavigationView navigationView;
     private SettingsManager settings;
     private Calendar date;
     private int dateOffset = 0;
-    private DrawerLayout mDrawer;
+    private DrawerLayout drawerLayout;
     private Toolbar toolbar;
     private ActionBarDrawerToggle drawerToggle;
 
@@ -44,32 +45,9 @@ public class MainActivity extends AppCompatActivity {
         return context;
     }
 
-    public static void setLanguage(String language) {
-        Locale locale = new Locale(language);
-        Locale.setDefault(locale);
-        Resources resources = context.getResources();
-        Configuration configuration = resources.getConfiguration();
-        configuration.setLocale(locale);
-        resources.updateConfiguration(configuration, resources.getDisplayMetrics());
-
-        nvDrawer.getMenu().clear();
-        nvDrawer.inflateMenu(R.menu.drawer_view);
-    }
-
-    public static void setFontSize(int size) {
-        switch (size) {
-            case 0:
-                context.setTheme(R.style.FontSmall);
-                break;
-            case 1:
-                context.setTheme(R.style.FontNormal);
-                break;
-            case 2:
-                context.setTheme(R.style.FontLarge);
-                break;
-            default:
-                context.setTheme(R.style.FontNormal);
-        }
+    public static void recreateNavigationDrawer() {
+        navigationView.getMenu().clear();
+        navigationView.inflateMenu(R.menu.drawer_view);
     }
 
     @Override
@@ -81,16 +59,13 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // This will display an Up icon (<-), we will replace it with hamburger later
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // Find our drawer view
-        mDrawer = findViewById(R.id.drawer_layout);
-        nvDrawer = findViewById(R.id.nvView);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nvView);
 
         // Setup drawer view
-        setupDrawerContent(nvDrawer);
-
+        setupDrawerContent(navigationView);
         drawerToggle = setupDrawerToggle();
 
         // Setup toggle to display hamburger icon with nice animation
@@ -98,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         drawerToggle.syncState();
 
         // Tie DrawerLayout events to the ActionBarToggle
-        mDrawer.addDrawerListener(drawerToggle);
+        drawerLayout.addDrawerListener(drawerToggle);
 
         // Open home fragment as default
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -108,19 +83,20 @@ public class MainActivity extends AppCompatActivity {
         movieArchive.printArchiveInfo();
 
         settings = SettingsManager.getInstance();
-        setFontSize(settings.getFontSize());
+        setFontSize(this, settings.getFontSize());
 
         switch (settings.getLanguageIndex()) {
             case 0:
-                setLanguage("en");
+                setLanguage(this, "en");
                 break;
             case 1:
-                setLanguage("fi");
+                setLanguage(this, "fi");
                 break;
             default:
-                setLanguage("en");
+                setLanguage(this, "en");
         }
 
+        // Update archive
         date = Calendar.getInstance();
         Toast.makeText(getApplicationContext(), getString(R.string.archive_updating) + "...", Toast.LENGTH_SHORT).show();
         updateArchive();
@@ -160,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), getString(R.string.archive_updated), Toast.LENGTH_SHORT).show();
                 return;
             }
+            // TODO: Is this necessary? Does user need info on every updated day?
             Toast.makeText(getApplicationContext(), getString(R.string.archive_updating) + " " + dateOffset + "/" + settings.getUpdateArchiveLength(), Toast.LENGTH_SHORT).show();
         }
 
@@ -170,7 +147,6 @@ public class MainActivity extends AppCompatActivity {
         reader.setCallback(this::dataCallback);
         reader.setShowDialog(false);
         reader.execute();
-        System.out.println(url);
 
         areaIndex++;
         movieArchive.saveArchive();
@@ -182,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
             updateArchive();
             return;
         }
+
         TheatreArea area = new TheatreArea(areaId.getId());
         for (String[] entry : result) {
             Movie movie = new Movie(entry);
@@ -226,7 +203,9 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
             e.printStackTrace();
         }
 
@@ -243,12 +222,10 @@ public class MainActivity extends AppCompatActivity {
             setTitle(R.string.app_name);
 
         // Close the navigation drawer
-        mDrawer.closeDrawers();
+        drawerLayout.closeDrawers();
     }
 
     private ActionBarDrawerToggle setupDrawerToggle() {
-        // NOTE: Make sure you pass in a valid toolbar reference.  ActionBarDrawToggle() does not require it
-        // and will not render the hamburger icon without it.
-        return new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open, R.string.drawer_close);
+        return new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
     }
 }

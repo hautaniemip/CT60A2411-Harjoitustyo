@@ -1,5 +1,8 @@
 package com.tite.ct60a2411_harjoitustyo;
 
+import static com.tite.ct60a2411_harjoitustyo.HelperFunctions.readObject;
+import static com.tite.ct60a2411_harjoitustyo.HelperFunctions.saveObject;
+
 import java.io.Serializable;
 
 public class SettingsManager implements Serializable {
@@ -18,7 +21,7 @@ public class SettingsManager implements Serializable {
 
     public static SettingsManager getInstance() {
         if (instance == null) {
-            instance = (SettingsManager) ObjectSaveUtils.readObject("SettingsManager.data");
+            instance = (SettingsManager) readObject("SettingsManager.data");
             if (instance == null)
                 instance = new SettingsManager();
         }
@@ -26,7 +29,7 @@ public class SettingsManager implements Serializable {
     }
 
     public void saveSettings() {
-        ObjectSaveUtils.saveObject(instance, "SettingsManager.data");
+        saveObject(instance, "SettingsManager.data");
     }
 
     public int getLanguageIndex() {

@@ -55,6 +55,7 @@ public class XMLReaderTask extends AsyncTask<String[], Void, ArrayList<String[]>
     @Override
     protected ArrayList<String[]> doInBackground(String[]... strings) {
         try {
+            // Make a connection and parse data
             URL url = new URL(this.url);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setReadTimeout(10000);

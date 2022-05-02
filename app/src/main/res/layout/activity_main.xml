@@ -6,19 +6,16 @@
     android:layout_height="match_parent"
     android:background="@color/black">
 
-    <!-- This LinearLayout represents the contents of the screen  -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- The ActionBar displayed at the top -->
         <include
             layout="@layout/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <!-- The main content view where fragments are loaded -->
         <FrameLayout
             android:id="@+id/fragmentContent"
             android:layout_width="match_parent"
@@ -26,14 +23,12 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </LinearLayout>
 
-    <!-- The navigation drawer that comes from the left -->
-    <!-- Note that `android:layout_gravity` needs to be set to 'start' -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nvView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="?attr/colorPrimaryDark"
-        app:menu="@menu/drawer_view"
-        app:itemBackground="@drawable/drawer_selected_item"/>
+        app:itemBackground="@drawable/drawer_selected_item"
+        app:menu="@menu/drawer_view" />
 </androidx.drawerlayout.widget.DrawerLayout>

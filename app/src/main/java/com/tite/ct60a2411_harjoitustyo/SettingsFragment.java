@@ -1,5 +1,8 @@
 package com.tite.ct60a2411_harjoitustyo;
 
+import static com.tite.ct60a2411_harjoitustyo.HelperFunctions.setFontSize;
+import static com.tite.ct60a2411_harjoitustyo.HelperFunctions.setLanguage;
+
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -38,6 +41,7 @@ public class SettingsFragment extends Fragment {
         areaSpinner = view.findViewById(R.id.homeAreaSpinner);
         archiveDays = view.findViewById(R.id.editTextDays);
 
+        // Setup all spinners
         ArrayAdapter<CharSequence> languageAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.language_array, android.R.layout.simple_spinner_item);
         languageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         languageSpinner.setAdapter(languageAdapter);
@@ -53,20 +57,23 @@ public class SettingsFragment extends Fragment {
         areaSpinner.setAdapter(areaAdapter);
         areaSpinner.setSelection(settingsManager.getHomeArea().ordinal());
 
+        // Add listeners to all fields
         languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
                 switch (position) {
                     case 0:
-                        MainActivity.setLanguage("en");
+                        setLanguage(MainActivity.getContext(), "en");
                         break;
                     case 1:
-                        MainActivity.setLanguage("fi");
+                        setLanguage(MainActivity.getContext(), "fi");
                         break;
                     default:
-                        MainActivity.setLanguage("en");
+                        setLanguage(MainActivity.getContext(), "en");
                         break;
                 }
+
+                MainActivity.recreateNavigationDrawer();
 
                 if (position != settingsManager.getLanguageIndex())
                     reloadFragment();
@@ -79,10 +86,11 @@ public class SettingsFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> arg0) {
             }
         });
+
         fontSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
-                MainActivity.setFontSize(position);
+                setFontSize(MainActivity.getContext(), position);
                 if (position != settingsManager.getFontSize())
                     reloadFragment();
                 settingsManager.setFontSize(position);

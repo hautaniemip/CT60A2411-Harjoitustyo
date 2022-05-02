@@ -16,5 +16,5 @@
         android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
+    <!--TODO: Is this needed-->
 </androidx.constraintlayout.widget.ConstraintLayout>
