@@ -34,7 +34,7 @@
 
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/popularButton"
                 android:layout_width="match_parent"
                 android:layout_height="123dp"
                 android:text="Popular movie" />

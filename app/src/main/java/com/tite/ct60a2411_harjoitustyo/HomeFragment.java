@@ -18,10 +18,12 @@ import androidx.fragment.app.Fragment;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class HomeFragment extends Fragment {
     private Button movie1Button;
     private Button movie2Button;
+    private Button popularButton;
     private ArrayList<Movie> movies;
 
     private SettingsManager settingsManager;
@@ -52,6 +54,7 @@ public class HomeFragment extends Fragment {
 
         movie1Button = view.findViewById(R.id.movie1Button);
         movie2Button = view.findViewById(R.id.movie2Button);
+        popularButton = view.findViewById(R.id.popularButton);
 
         String url = "https://www.finnkino.fi/xml/Schedule/?area=" + settingsManager.getHomeArea();
 
@@ -75,11 +78,7 @@ public class HomeFragment extends Fragment {
         movie1Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.getContext(), MovieActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("movie", movies.get(0));
-                intent.putExtras(bundle);
-                MainActivity.getContext().startActivity(intent);
+                openActivity(movies.get(0));
             }
         });
 
@@ -87,12 +86,26 @@ public class HomeFragment extends Fragment {
         movie2Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.getContext(), MovieActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("movie", movies.get(1));
-                intent.putExtras(bundle);
-                MainActivity.getContext().startActivity(intent);
+                openActivity(movies.get(1));
             }
         });
+
+
+        int popularIndex = new Random().nextInt(movies.size());
+        popularButton.setText(movies.get(popularIndex).getTitle());
+        popularButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openActivity(movies.get(popularIndex));
+            }
+        });
+    }
+
+    public void openActivity(Movie movie) {
+        Intent intent = new Intent(MainActivity.getContext(), MovieActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("movie", movie);
+        intent.putExtras(bundle);
+        MainActivity.getContext().startActivity(intent);
     }
 }
