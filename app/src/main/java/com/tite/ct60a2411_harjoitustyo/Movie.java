@@ -22,6 +22,8 @@ public class Movie implements Serializable {
     private String auditorium;
     private String largeImageUrl;
 
+    private float userRating;
+
     public Movie(int ID, Date startTime, Date endTime, int eventId, String title, String originalTitle, int year, int length, String rating, int theatreId, String theatreName, String auditorium, String largeImageUrl) {
         this.ID = ID;
         this.startTime = startTime;
@@ -167,6 +169,14 @@ public class Movie implements Serializable {
 
     public void setLargeImageUrl(String largeImageUrl) {
         this.largeImageUrl = largeImageUrl;
+    }
+
+    public float getUserRating() {
+        return userRating;
+    }
+
+    public void setUserRating(float userRating) {
+        this.userRating = userRating;
     }
 
     @NonNull
