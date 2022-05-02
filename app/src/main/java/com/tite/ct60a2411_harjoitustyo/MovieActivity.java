@@ -3,14 +3,20 @@ package com.tite.ct60a2411_harjoitustyo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.MatrixCursor;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
@@ -58,10 +64,25 @@ public class MovieActivity extends AppCompatActivity {
                 cursor.addRow(new Object[]{key++, getString(R.string.theatre), movie.getTheatreName() + ", " + movie.getAuditorium()});
             }
 
+            if (movie.getLargeImageUrl() != null)
+                cursor.addRow(new Object[]{key++, "URL", movie.getLargeImageUrl()});
+
             SimpleCursorAdapter data = new SimpleCursorAdapter(this, R.layout.layout_two_list_item, cursor, columns, layouts);
 
             list = findViewById(R.id.dataContainer);
             list.setAdapter(data);
+
+            ImageView imageView = (ImageView) findViewById(R.id.imageView);
+
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Drawable d = LoadImageFromWebOperations(movie.getLargeImageUrl().replaceAll("^http://", "https://"));
+                    imageView.setImageDrawable(d);
+                    System.out.println("Image loaded");
+                }
+            });
+            thread.start();
 
         } else {
             errorText.setText(R.string.movie_error);
@@ -113,5 +134,19 @@ public class MovieActivity extends AppCompatActivity {
             default:
                 this.setTheme(R.style.FontNormal);
         }
+    }
+
+    public static Drawable LoadImageFromWebOperations(String url) {
+        try {
+            InputStream is = (InputStream) new URL(url).getContent();
+            Drawable d = Drawable.createFromStream(is, null);
+            System.out.println("Loading the photo");
+            return d;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
