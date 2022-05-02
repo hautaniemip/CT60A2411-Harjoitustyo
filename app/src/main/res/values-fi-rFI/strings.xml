@@ -30,8 +30,8 @@
         <item>Iso</item>
     </string-array>
     <string name="language">Kieli</string>
-    <string name="font_size">Fontti koko</string>
-    <string name="home_area">Teatteri alue</string>
-    <string name="number_of_future_days_archive_updates">Arkiston päivitys pituus</string>
+    <string name="font_size">Fonttikoko</string>
+    <string name="home_area">Teatterialue</string>
+    <string name="number_of_future_days_archive_updates">Arkiston päivityspituus</string>
     <string name="movie_error">Virhe ei elokuvaa</string>
 </resources>

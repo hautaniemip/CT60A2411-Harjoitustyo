@@ -31,7 +31,7 @@ public class HomeFragment extends Fragment {
             System.out.println("Loading the photo");
             return d;
         } catch (Exception e) {
-            System.out.println("Exception in loading the image" + e);
+            e.printStackTrace();
             return null;
         }
     }

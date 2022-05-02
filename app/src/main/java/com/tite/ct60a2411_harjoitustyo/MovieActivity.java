@@ -1,5 +1,7 @@
 package com.tite.ct60a2411_harjoitustyo;
 
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.MatrixCursor;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -10,8 +12,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class MovieActivity extends AppCompatActivity {
+    private SettingsManager settings;
     private Movie movie;
     private ListView list;
 
@@ -65,10 +69,49 @@ public class MovieActivity extends AppCompatActivity {
 
         setSupportActionBar(findViewById(R.id.include));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        settings = SettingsManager.getInstance();
+        setFontSize(settings.getFontSize());
+
+        switch (settings.getLanguageIndex()) {
+            case 0:
+                setLanguage("en");
+                break;
+            case 1:
+                setLanguage("fi");
+                break;
+            default:
+                setLanguage("en");
+        }
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         finish();
         return true;
+    }
+
+    public void setLanguage(String language) {
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+        Resources resources = this.getResources();
+        Configuration configuration = resources.getConfiguration();
+        configuration.setLocale(locale);
+        resources.updateConfiguration(configuration, resources.getDisplayMetrics());
+    }
+
+    public void setFontSize(int size) {
+        switch (size) {
+            case 0:
+                this.setTheme(R.style.FontSmall);
+                break;
+            case 1:
+                this.setTheme(R.style.FontNormal);
+                break;
+            case 2:
+                this.setTheme(R.style.FontLarge);
+                break;
+            default:
+                this.setTheme(R.style.FontNormal);
+        }
     }
 }
