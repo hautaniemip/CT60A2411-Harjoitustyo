@@ -11,6 +11,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
+        android:background="@drawable/spinner_background"
+        android:minHeight="15dp"
+        android:paddingEnd="20dp"
+        android:popupBackground="@color/dark_grey"
         app:layout_constraintStart_toEndOf="@+id/textView3"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -19,6 +23,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
+        android:background="@drawable/spinner_background"
+        android:minHeight="15dp"
+        android:paddingEnd="20dp"
+        android:popupBackground="@color/dark_grey"
+        android:textAlignment="textStart"
         app:layout_constraintStart_toStartOf="@+id/languageSpinner"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -60,6 +69,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
+        android:background="@drawable/spinner_background"
+        android:minHeight="15dp"
+        android:paddingEnd="20dp"
+        android:popupBackground="@color/dark_grey"
         app:layout_constraintStart_toStartOf="@+id/languageSpinner"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -80,6 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:backgroundTint="@color/yellow"
         android:ems="10"
         android:importantForAutofill="no"
         android:inputType="number"

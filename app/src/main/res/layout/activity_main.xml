@@ -35,5 +35,5 @@
         android:layout_gravity="start"
         android:background="?attr/colorPrimaryDark"
         app:menu="@menu/drawer_view"
-        app:itemBackground="@drawable/drawer_selected_item" />
+        app:itemBackground="@drawable/drawer_selected_item"/>
 </androidx.drawerlayout.widget.DrawerLayout>
