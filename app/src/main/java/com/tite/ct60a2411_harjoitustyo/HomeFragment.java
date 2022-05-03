@@ -60,7 +60,7 @@ public class HomeFragment extends Fragment {
         popularButton = view.findViewById(R.id.popularButton);
         //imageButton = view.findViewById(R.id.imageButton);
 
-        String url = "https://www.finnkino.fi/xml/Schedule/?area=" + settingsManager.getHomeArea();
+        String url = "https://www.finnkino.fi/xml/Schedule/?area=" + settingsManager.getHomeArea().getId();
 
         XMLReaderTask reader = new XMLReaderTask(MainActivity.getContext(), url, "Show", MainActivity.getTags());
         reader.setShowDialog(false);
@@ -106,55 +106,63 @@ public class HomeFragment extends Fragment {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    int movieIndex = 2;
-                    int index = 1;
-                    Drawable drawable;
-                    while (movies.get(movieIndex) != null && index <= 10) {
-                        String s = "imageButton" + index;
+                int movieIndex = 2;
+                int index = 10;
 
-                        int resID = getResources().getIdentifier(s, "id", "com.tite.ct60a2411_harjoitustyo");
-                        imageButton = view.findViewById(resID);
-                        System.out.println(index + ":" + resID + " : " + imageButton);
+                while (movieIndex < movies.size() && movies.get(movieIndex) != null && index >= 1) {
+                    final Drawable finalDrawable = LoadImageFromUrl(movies.get(movieIndex).getLargeImageUrl().replaceAll("^http://", "https://"));;
+                    final int finalMovieIndex = movieIndex;
+                    final ImageButton finalImageButton = getImageButton("imageButton" + index);
 
-                        drawable = LoadImageFromUrl(movies.get(movieIndex).getLargeImageUrl().replaceAll("^http://", "https://"));
+                    MainActivity.getContext().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (finalDrawable == null) {
+                                System.out.println(finalDrawable + ":" + finalMovieIndex + " : " + finalImageButton);
+                                finalImageButton.setVisibility(View.GONE);
+                                return;
+                            }
+                            finalImageButton.setImageDrawable(finalDrawable);
 
-                        final Drawable finalDrawable = drawable;
-                        final int finalMovieIndex = movieIndex;
-                        MainActivity.getContext().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (finalDrawable != null) {
-                                    imageButton.setImageDrawable(finalDrawable);
+                            finalImageButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    openActivity(movies.get(finalMovieIndex));
                                 }
-                            }
-                        });
-                        // TODO: ImageButton functionality is here
-                        imageButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                openActivity(movies.get(finalMovieIndex));
-                            }
-                        });
-                        // TODO: and it ends here
-                        index++;
-                        movieIndex++;
-                    }
+                            });
+                        }
+                    });
 
-                    System.out.println("Image loaded");
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    index--;
+                    movieIndex++;
+                }
+
+                // Loop through rest of the image buttons and hide them
+                while (index >= 1){
+                    final ImageButton finalImageButton = getImageButton("imageButton" + index);
+                    MainActivity.getContext().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            finalImageButton.setVisibility(View.GONE);
+                        }
+                    });
+                    index--;
                 }
             }
         });
         thread.start();
     }
 
-    public void openActivity(Movie movie) {
+    private void openActivity(Movie movie) {
         Intent intent = new Intent(MainActivity.getContext(), MovieActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("movie", movie);
         intent.putExtras(bundle);
         MainActivity.getContext().startActivity(intent);
+    }
+
+    private ImageButton getImageButton(String name) {
+        int resID = getResources().getIdentifier(name, "id", "com.tite.ct60a2411_harjoitustyo");
+        return view.findViewById(resID);
     }
 }
