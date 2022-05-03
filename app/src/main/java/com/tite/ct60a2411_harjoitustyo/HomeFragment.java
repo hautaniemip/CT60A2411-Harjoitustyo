@@ -22,7 +22,6 @@ import java.util.Random;
 public class HomeFragment extends Fragment {
     private Button movie1Button;
     private Button movie2Button;
-    private ImageButton imageButton;
     private View view;
     private Button popularButton;
     private ArrayList<Movie> movies;
@@ -58,7 +57,6 @@ public class HomeFragment extends Fragment {
         movie1Button = view.findViewById(R.id.movie1Button);
         movie2Button = view.findViewById(R.id.movie2Button);
         popularButton = view.findViewById(R.id.popularButton);
-        //imageButton = view.findViewById(R.id.imageButton);
 
         String url = "https://www.finnkino.fi/xml/Schedule/?area=" + settingsManager.getHomeArea().getId();
 
@@ -110,15 +108,15 @@ public class HomeFragment extends Fragment {
                 int index = 10;
 
                 while (movieIndex < movies.size() && movies.get(movieIndex) != null && index >= 1) {
-                    final Drawable finalDrawable = LoadImageFromUrl(movies.get(movieIndex).getLargeImageUrl().replaceAll("^http://", "https://"));;
+                    final Drawable finalDrawable = LoadImageFromUrl(movies.get(movieIndex).getLargeImageUrl().replaceAll("^http://", "https://"));
                     final int finalMovieIndex = movieIndex;
                     final ImageButton finalImageButton = getImageButton("imageButton" + index);
 
+                    System.out.println(MainActivity.getContext());
                     MainActivity.getContext().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             if (finalDrawable == null) {
-                                System.out.println(finalDrawable + ":" + finalMovieIndex + " : " + finalImageButton);
                                 finalImageButton.setVisibility(View.GONE);
                                 return;
                             }
@@ -162,7 +160,7 @@ public class HomeFragment extends Fragment {
     }
 
     private ImageButton getImageButton(String name) {
-        int resID = getResources().getIdentifier(name, "id", "com.tite.ct60a2411_harjoitustyo");
+        int resID = MainActivity.getContext().getResources().getIdentifier(name, "id", "com.tite.ct60a2411_harjoitustyo");
         return view.findViewById(resID);
     }
 }
