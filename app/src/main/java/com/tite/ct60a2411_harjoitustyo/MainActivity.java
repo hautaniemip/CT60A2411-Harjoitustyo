@@ -75,9 +75,11 @@ public class MainActivity extends AppCompatActivity {
         // Tie DrawerLayout events to the ActionBarToggle
         drawerLayout.addDrawerListener(drawerToggle);
 
-        // Open home fragment as default
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragmentContent, new HomeFragment()).commit();
+        // Open home fragment if there is no fragment loaded
+        if (savedInstanceState == null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.fragmentContent, new HomeFragment()).commit();
+        }
 
         movieArchive = MovieArchive.getInstance();
         movieArchive.printArchiveInfo();
