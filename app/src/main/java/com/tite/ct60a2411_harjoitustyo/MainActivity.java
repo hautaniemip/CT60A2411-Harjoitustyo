@@ -136,8 +136,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), getString(R.string.archive_updated), Toast.LENGTH_SHORT).show();
                 return;
             }
-            // TODO: Toast is still here just commented out
-            //Toast.makeText(getApplicationContext(), getString(R.string.archive_updating) + " " + dateOffset + "/" + settings.getUpdateArchiveLength(), Toast.LENGTH_SHORT).show();
         }
 
         TheatreArea.AreaId areaId = TheatreArea.AreaId.values()[areaIndex];
