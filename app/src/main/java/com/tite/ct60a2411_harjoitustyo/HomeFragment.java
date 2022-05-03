@@ -112,7 +112,6 @@ public class HomeFragment extends Fragment {
                     final int finalMovieIndex = movieIndex;
                     final ImageButton finalImageButton = getImageButton("imageButton" + index);
 
-                    System.out.println(MainActivity.getContext());
                     MainActivity.getContext().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
