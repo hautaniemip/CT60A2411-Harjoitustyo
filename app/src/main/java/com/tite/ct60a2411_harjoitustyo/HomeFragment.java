@@ -58,7 +58,7 @@ public class HomeFragment extends Fragment {
         movie1Button = view.findViewById(R.id.movie1Button);
         movie2Button = view.findViewById(R.id.movie2Button);
         popularButton = view.findViewById(R.id.popularButton);
-        imageButton = view.findViewById(R.id.imageButton);
+        //imageButton = view.findViewById(R.id.imageButton);
 
         String url = "https://www.finnkino.fi/xml/Schedule/?area=" + settingsManager.getHomeArea();
 
@@ -120,16 +120,25 @@ public class HomeFragment extends Fragment {
                         drawable = LoadImageFromUrl(movies.get(movieIndex).getLargeImageUrl().replaceAll("^http://", "https://"));
 
                         final Drawable finalDrawable = drawable;
+                        final int finalMovieIndex = movieIndex;
                         MainActivity.getContext().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                if (finalDrawable != null)
+                                if (finalDrawable != null) {
                                     imageButton.setImageDrawable(finalDrawable);
+                                }
                             }
                         });
+                        // TODO: ImageButton functionality is here
+                        imageButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                openActivity(movies.get(finalMovieIndex));
+                            }
+                        });
+                        // TODO: and it ends here
                         index++;
                         movieIndex++;
-                        // TODO: error catch for unloaded pictures
                     }
 
                     System.out.println("Image loaded");
